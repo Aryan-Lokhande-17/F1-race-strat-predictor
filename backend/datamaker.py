@@ -1,59 +1,91 @@
 import fastf1
 import pandas as pd
 
-# Enable FastF1 cache
 fastf1.Cache.enable_cache('cache')
 
-# List of races you want
 races = [
-    'Bahrain', 'Saudi Arabia', 'Chinese', 'Japanese',
-    'Miami', 'Spanish', 'Austrian', 'British',
-    'Dutch', 'Monza', 'Abu Dhabi'
+    'Bahrain', 'Saudi Arabia', 'Chinese', 'Japanese', 'Miami',
+    'Spanish', 'Austrian', 'British', 'Dutch', 'Monza', 'Abu Dhabi'
 ]
 
-year = 2024
-all_stints = []
+data_list = []
 
 for race in races:
     try:
-        print(f"Loading {race} {year}...")
-        session = fastf1.get_session(year, race, 'R')
+        session = fastf1.get_session(2024, race, 'R')
         session.load()
-        
-        laps = session.laps.copy()
-        results = session.results.set_index('DriverNumber')
-        
-        # Get stint summary: one row = one stint for a driver
-        stint_data = laps.groupby(['Driver', 'Stint']).agg({
-            'Compound': 'first',
-            'LapNumber': ['min', 'max']
-        })
-        
-        stint_data.columns = ['Compound', 'StintStartLap', 'StintEndLap']
-        stint_data = stint_data.reset_index()
-        
-        # Add grid position and track name
-        stint_data['Track'] = race
-        stint_data['GridPosition'] = stint_data['Driver'].map(
-            lambda drv: results.loc[session.get_driver(drv)['DriverNumber']]['GridPosition']
-            if session.get_driver(drv)['DriverNumber'] in results.index else None
-        )
-        
-        # Compute stint length
-        stint_data['StintLength'] = stint_data['StintEndLap'] - stint_data['StintStartLap'] + 1
-        
-        # Keep columns we want
-        stint_data = stint_data[['Track', 'Driver', 'GridPosition', 'Stint', 'Compound', 'StintLength']]
-        
-        all_stints.append(stint_data)
-        
+        print(f"✅ Loaded {race}")
     except Exception as e:
-        print(f"❌ Failed to load {race} {year}: {e}")
+        print(f"❌ Could not load {race}: {e}")
+        continue
 
-# Combine all
-df = pd.concat(all_stints, ignore_index=True)
+    weather = session.weather_data
+    avg_air_temp = weather['AirTemp'].mean() if weather is not None else None
+    avg_track_temp = weather['TrackTemp'].mean() if weather is not None else None
+
+    results = session.results.set_index('Abbreviation')
+    laps = session.laps
+
+    if laps.empty:
+        continue
+
+    for drv in laps['Driver'].unique():
+        drv_laps = laps.pick_driver(drv).sort_values('LapNumber')
+
+        stint_num = 1
+        current_compound = None
+        stint_lap_count = 0
+        pit_lap = None
+
+        for idx, lap in drv_laps.iterrows():
+            compound = lap['Compound']
+            lap_num = lap['LapNumber']
+
+            if current_compound is None:
+                # First stint starts
+                current_compound = compound
+                stint_lap_count = 1
+                pit_lap = None
+            elif compound != current_compound:
+                # Compound change = new stint
+                data_list.append({
+                    'Track': race,
+                    'Driver': drv,
+                    'Team': results.loc[drv]['TeamName'] if drv in results.index else None,
+                    'GridPosition': results.loc[drv]['GridPosition'] if drv in results.index else None,
+                    'Stint': stint_num,
+                    'Compound': current_compound,
+                    'StintLength': stint_lap_count,
+                    'PitLap': pit_lap,
+                    'AvgAirTemp': avg_air_temp,
+                    'AvgTrackTemp': avg_track_temp
+                })
+                stint_num += 1
+                current_compound = compound
+                stint_lap_count = 1
+                pit_lap = lap_num
+            else:
+                stint_lap_count += 1
+
+        # Add the final stint
+        if stint_lap_count > 0:
+            data_list.append({
+                'Track': race,
+                'Driver': drv,
+                'Team': results.loc[drv]['TeamName'] if drv in results.index else None,
+                'GridPosition': results.loc[drv]['GridPosition'] if drv in results.index else None,
+                'Stint': stint_num,
+                'Compound': current_compound,
+                'StintLength': stint_lap_count,
+                'PitLap': pit_lap,
+                'AvgAirTemp': avg_air_temp,
+                'AvgTrackTemp': avg_track_temp
+            })
+
+# Create DataFrame
+df = pd.DataFrame(data_list)
 
 # Save to CSV
-df.to_csv("f1_2024_stint_data.csv", index=False)
+df.to_csv('race_strategy_dataset.csv', index=False)
 
-print("\n✅ Dataset saved as f1_2024_stint_data.csv")
+print("📁 Saved dataset as 'race_strategy_dataset.csv'")

@@ -10,8 +10,8 @@ import joblib
 
 def train_and_compare_models(rf_model_path, xgb_model_path):
     # 🛡 Compute absolute paths safely
-    current_dir = os.path.dirname(__file__)               # backend/model/
-    backend_dir = os.path.dirname(current_dir)            # backend/
+    current_dir = os.path.dirname(__file__)               
+    backend_dir = os.path.dirname(current_dir)       
     data_path = os.path.join(backend_dir, 'processed_data.csv')
     rf_model_path = os.path.join(backend_dir, rf_model_path)
     xgb_model_path = os.path.join(backend_dir, xgb_model_path)
@@ -24,24 +24,20 @@ def train_and_compare_models(rf_model_path, xgb_model_path):
         X, y, test_size=0.2, random_state=42, stratify=y
     )
 
-    # Random Forest
     rf = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
     rf.fit(X_train, y_train)
     y_pred_rf = rf.predict(X_test)
 
-    # XGBoost
     xgb = XGBClassifier(n_estimators=100, max_depth=5, use_label_encoder=False, eval_metric='mlogloss', random_state=42)
     xgb.fit(X_train, y_train)
     y_pred_xgb = xgb.predict(X_test)
 
-    # Evaluate + print reports
     print("✅ Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
     print(classification_report(y_test, y_pred_rf))
 
     print("✅ XGBoost Accuracy:", accuracy_score(y_test, y_pred_xgb))
     print(classification_report(y_test, y_pred_xgb))
 
-    # Plot confusion matrices
     cm_rf = confusion_matrix(y_test, y_pred_rf)
     cm_xgb = confusion_matrix(y_test, y_pred_xgb)
 
@@ -60,7 +56,6 @@ def train_and_compare_models(rf_model_path, xgb_model_path):
     plt.tight_layout()
     plt.show()
 
-    # Save models
     joblib.dump(rf, rf_model_path)
     joblib.dump(xgb, xgb_model_path)
     print(f"💾 Models saved: {rf_model_path}, {xgb_model_path}")

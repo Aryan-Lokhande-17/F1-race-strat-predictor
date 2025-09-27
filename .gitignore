@@ -9,3 +9,8 @@ backend/cache/**
 
 backend/saved_models/*.pkl
 backend/saved_models/*.h5
+
+backend/model/cache
+
+backend/model/saved_models/rf_xgb_ensemble.pkl
+

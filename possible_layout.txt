@@ -1,0 +1,75 @@
+F1-RACE-STRAT-PREDICTOR
+│
+├── .venv/
+│
+├── backend/
+│   ├── api/
+│   │   └── ... (unchanged)
+│   │
+│   ├── model/
+│   │   ├── cache/
+│   │   ├── saved_models/
+│   │   ├── analyze_models.py
+│   │   ├── datamaker.py
+│   │   ├── missing_races_24_25.csv
+│   │   ├── Model_training.ipynb
+│   │   ├── preprocess.py
+│   │   ├── processed_race_dataset.csv
+│   │   ├── race_dataset_complete.csv
+│   │   ├── train_model.py
+│   │   ├── saved_models/ (your trained NN + LSTM)
+│   │   ├── predict.py
+│   │   ├── processed_data.csv
+│   │   ├── race_strategy_dataset.csv
+│   │   │
+│   │   ├── **tire_degradation.py**   🔥 (new: math model + curve fitting)
+│   │   ├── **pit_stop_optimizer.py** 🔥 (new: DP/optimization solver)
+│   │   ├── **simulate_strategy.py**  🔥 (new: runs sims combining ML + math models)
+│   │
+│   └── ...
+│
+├── frontend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── current-race/
+│   │   │   ├── drivers/
+│   │   │   ├── historical-races/
+│   │   │   ├── race-data/
+│   │   │   ├── race-info/
+│   │   │   │   └── route.ts
+│   │   │   ├── track-info/
+│   │   │   │   └── route.ts
+│   │   │   └── route.ts
+│   │   │
+│   │   ├── components/
+│   │   │   ├── ui/
+│   │   │   ├── driver-selection.tsx
+│   │   │   ├── historical-data.tsx
+│   │   │   ├── podium-prediction.tsx
+│   │   │   ├── race-header.tsx
+│   │   │   ├── strategy-visualization.tsx
+│   │   │   ├── track-info.tsx
+│   │   │   ├── weather-panel.tsx
+│   │   │   │
+│   │   │   ├── **tire-deg-graph.tsx**   🔥 (new: visualize deg curves per compound)
+│   │   │   ├── **pit-strategy-graph.tsx** 🔥 (new: visualize optimal pit stop timings)
+│   │   │   ├── **strategy-sim-result.tsx** 🔥 (new: compare ML vs math-optimal strategy)
+│   │   │
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │
+│   └── ...
+│
+├── hooks/
+├── lib/
+├── node_modules/
+├── public/
+├── scripts/
+├── styles/
+│
+├── .gitignore
+├── components.json
+├── next-env.d.ts
+├── next.config.mjs
+└── ...

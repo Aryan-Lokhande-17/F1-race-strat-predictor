@@ -1,7 +1,4 @@
-from pathlib import Path
-
-# Define the README content in Markdown format
-readme_content = """# 🏎️ Tyre Degradation & Race Strategy Prediction Model
+## We are trying to create a model, that predicts tyre degradation as well as give the suggested tyre strategy which is race specific. Along with that we are also training a model that preditcts race winners based on the starting grid, quali performance, performance run data ir tyre deg data as an input, and drivers past statistics on that track.
 
 ## 1. Data Gathering
 - We are creating a model that:

@@ -45,8 +45,3 @@
   - This method provided the most logical and performance-consistent imputation.
 """
 
-# Save to a markdown file
-readme_path = Path("/mnt/data/tyre_degradation_readme.md")
-readme_path.write_text(readme_content)
-
-readme_path

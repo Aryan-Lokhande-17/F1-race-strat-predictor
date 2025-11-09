@@ -2,11 +2,11 @@ __pycache__/
 *.pyc
 .venv/
 *.env
-
+fastf1_cache
 # FastF1 cache
 backend/cache/
 backend/cache/**
-
+F1_Data
 backend/saved_models/*.pkl
 backend/saved_models/*.h5
 

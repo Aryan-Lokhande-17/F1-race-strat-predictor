@@ -1,0 +1,24 @@
+{
+    "opt3_features": [
+        "residual",
+        "tyre_age_recalc",
+        "compound_HARD",
+        "compound_INTERMEDIATE",
+        "compound_MEDIUM",
+        "compound_SOFT",
+        "compound_TEST_UNKNOWN",
+        "compound_UNKNOWN",
+        "compound_WET"
+    ],
+    "compound_dummies": [
+        "compound_HARD",
+        "compound_INTERMEDIATE",
+        "compound_MEDIUM",
+        "compound_SOFT",
+        "compound_TEST_UNKNOWN",
+        "compound_UNKNOWN",
+        "compound_WET"
+    ],
+    "optional_feats": [],
+    "seq_len": 5
+}

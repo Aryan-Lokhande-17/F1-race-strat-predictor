@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Autodromo Hermanos Rodriguez",
+    "length_km": 4.304,
+    "corners": 17,
+    "drs_zones": 2,
+    "lap_record": { "time": "1:17.774", "driver": "V. Bottas", "year": 2021 },
+    "aliases": ["mexico city", "hermanos rodriguez", "autódromo hermanos rodríguez"]
+  },
+  {
+    "name": "Monza",
+    "length_km": 5.793,
+    "corners": 11,
+    "drs_zones": 2,
+    "lap_record": { "time": "1:21.046", "driver": "R. Barrichello", "year": 2004 },
+    "aliases": ["autodromo nazionale monza", "italian grand prix"]
+  },
+  {
+    "name": "Silverstone",
+    "length_km": 5.891,
+    "corners": 18,
+    "drs_zones": 3,
+    "lap_record": { "time": "1:27.097", "driver": "M. Hamilton", "year": 2019 },
+    "aliases": ["silverstone circuit", "british grand prix"]
+  },
+  {
+    "name": "Marina Bay",
+    "length_km": 4.940,
+    "corners": 19,
+    "drs_zones": 2,
+    "lap_record": { "time": "1:35.867", "driver": "L. Norris", "year": 2024 },
+    "aliases": ["singapore", "marina bay street circuit"]
+  },
+  {
+    "name": "Yas Marina",
+    "length_km": 5.281,
+    "corners": 16,
+    "drs_zones": 2,
+    "aliases": ["abu dhabi", "yas marina circuit"]
+  }
+]

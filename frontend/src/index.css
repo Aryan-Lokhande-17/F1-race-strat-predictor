@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #0A0A0A;
+    --card: #0F0F10;
+    --line: #2B2B2B;
+    --muted: #171717;
+    --text: #F5F5F5;
+    --subtle: #CFCFCF;
+    --muted-text: #A3A3A3;
+    --brand: #E10600;
+  }
+  html, body, #root { height: 100%; }
+  body { @apply bg-[color:var(--bg)] text-[color:var(--text)] antialiased; }
+  a { @apply text-[color:var(--brand)] hover:opacity-90; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium bg-[color:var(--brand)] text-white hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-red-500/40;
+  }
+  .card {
+    @apply bg-[color:var(--card)] border border-neutral-800/80 rounded-xl shadow-sm transition-shadow;
+  }
+  .card:hover {
+    @apply shadow-md;
+  }
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900 px-3 py-1 text-sm text-white hover:border-neutral-700 transition focus:outline-none focus:ring-2 focus:ring-white/10;
+  }
+}

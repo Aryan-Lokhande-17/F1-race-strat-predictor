@@ -1,0 +1,9 @@
+0
+grid
+driver_strength_career
+driver_strength_season
+team_strength
+driver_dnf_rate
+team_dnf_rate
+driver_track_form
+team_track_form

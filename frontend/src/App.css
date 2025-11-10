@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.btn-primary {
+  background: var(--brand); color:#fff; padding:.5rem .9rem; border-radius:.5rem;
+}
+.btn-primary:disabled { opacity:.6; cursor:not-allowed; }
+.btn-secondary {
+  background:#1f2937; color:#fff; padding:.5rem .9rem; border:1px solid #374151; border-radius:.5rem;
+}

@@ -1,19 +1,26 @@
-export async function predictStrategy(
-  strategy: [string, number][],
-  baseLapTime: number,
-  pitLoss: number,
-  trackEnv: Record<string, number> | null = null
-) {
-  const response = await fetch("http://127.0.0.1:8000/predict_strategy", {
+// frontend/src/api/strategy.ts
+export interface StrategyPayload {
+  track: string;
+  strategy: [string, number][];
+  base_lap_time?: number;
+  pit_loss?: number;
+  track_env?: Record<string, number>;
+  driverId?: number;
+  constructorId?: number;
+  circuitId?: number;
+}
+
+export async function predictStrategy(payload: StrategyPayload) {
+  const res = await fetch("http://127.0.0.1:8000/predict_strategy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      strategy,
-      base_lap_time: baseLapTime,
-      pit_loss: pitLoss,
-      track_env: trackEnv
-    })
+    body: JSON.stringify(payload),
   });
 
-  return await response.json();
+  if (!res.ok) {
+    console.error("Backend error:", await res.text());
+    throw new Error("Strategy prediction failed");
+  }
+
+  return res.json();
 }

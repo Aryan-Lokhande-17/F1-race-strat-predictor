@@ -7,26 +7,47 @@ import SimulationPage from './pages/Simulation'
 import TrackInfoPage from './pages/TrackInfo'
 import HomePage from './pages/Home'
 import StrategySimulator from "./pages/StrategySimulator";
-
+import RacePredictor from "./pages/RacePredictor"; 
+import StrategyCompare from "./pages/StrategyCompare";
 
 const qc = new QueryClient()
 
 function Nav() {
   const { pathname } = useLocation()
+
   const tabs = [
     { path: '/historical', label: 'Race Data' },
     { path: '/simulation', label: 'Simulation' },
     { path: '/track-info', label: 'Track Info' },
     { path: '/weather', label: 'Weather' },
-    { path: '/ml', label: 'ML Predictions' },
+
+    // ✅ Tyre Strategy Simulator
+    { path: '/ml', label: 'Strategy Simulator' },
+
+    // ✅ Strategy Comparison Page
+    { path: '/compare', label: 'Compare Strategies' },
+
+    // Already existed:
+    { path: '/race', label: 'Race Predictor' }, 
   ]
+
   return (
     <header className="border-b border-neutral-800 sticky top-0 z-10 bg-[color:var(--bg)]/90 backdrop-blur">
       <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-6">
-        <Link to="/" className="text-xl font-semibold hover:opacity-90 transition"><span className="text-[color:var(--brand)]"></span>F1 Dashboard</Link>
+        <Link to="/" className="text-xl font-semibold hover:opacity-90 transition">
+          <span className="text-[color:var(--brand)]"></span>F1 Dashboard
+        </Link>
         <nav className="flex items-center gap-2 flex-wrap">
           {tabs.map(t => (
-            <Link key={t.path} to={t.path} className={`px-3 py-1.5 rounded-md text-sm ${pathname===t.path? 'bg-[color:var(--brand)] text-white' : 'hover:bg-neutral-900 text-[color:var(--subtle)]'}`}>
+            <Link
+              key={t.path}
+              to={t.path}
+              className={`px-3 py-1.5 rounded-md text-sm ${
+                pathname === t.path
+                  ? 'bg-[color:var(--brand)] text-white'
+                  : 'hover:bg-neutral-900 text-[color:var(--subtle)]'
+              }`}
+            >
               {t.label}
             </Link>
           ))}
@@ -60,7 +81,14 @@ export default function App(){
           <Route path="/simulation" element={<Simulation />} />
           <Route path="/track-info" element={<TrackInfoPage />} />
           <Route path="/weather" element={<WeatherPage />} />
+
+          {/* ✅ Strategy Simulator */}
           <Route path="/ml" element={<ML />} />
+
+          {/* ✅ Compare Strategies */}
+          <Route path="/compare" element={<StrategyCompare />} />
+
+          <Route path="/race" element={<RacePredictor />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

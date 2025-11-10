@@ -1,0 +1,862 @@
+driverId,code,forename,surname,number,constructorId,team_name
+1,HAM,Lewis,Hamilton,44,131,Mercedes
+2,HEI,Nick,Heidfeld,\N,4,Renault
+3,ROS,Nico,Rosberg,6,131,Mercedes
+4,ALO,Fernando,Alonso,14,117,Aston Martin
+5,KOV,Heikki,Kovalainen,\N,208,Lotus F1
+6,NAK,Kazuki,Nakajima,\N,3,Williams
+7,BOU,Sébastien,Bourdais,\N,5,Toro Rosso
+8,RAI,Kimi,Räikkönen,7,51,Alfa Romeo
+9,KUB,Robert,Kubica,88,51,Alfa Romeo
+10,GLO,Timo,Glock,\N,206,Marussia
+11,SAT,Takuma,Sato,\N,17,Jordan
+12,PIQ,Nelson,Piquet Jr.,\N,4,Renault
+13,MAS,Felipe,Massa,19,3,Williams
+14,COU,David,Coulthard,\N,3,Williams
+15,TRU,Jarno,Trulli,\N,205,Lotus
+16,SUT,Adrian,Sutil,99,15,Sauber
+17,WEB,Mark,Webber,\N,9,Red Bull
+18,BUT,Jenson,Button,22,1,McLaren
+19,DAV,Anthony,Davidson,\N,18,Minardi
+20,VET,Sebastian,Vettel,5,117,Aston Martin
+21,FIS,Giancarlo,Fisichella,\N,18,Minardi
+22,BAR,Rubens,Barrichello,\N,3,Williams
+23,SCH,Ralf,Schumacher,\N,17,Jordan
+24,LIU,Vitantonio,Liuzzi,\N,164,HRT
+25,WUR,Alexander,Wurz,\N,22,Benetton
+26,SPE,Scott,Speed,\N,5,Toro Rosso
+27,ALB,Christijan,Albers,\N,18,Minardi
+28,WIN,Markus,Winkelhock,\N,12,Spyker
+29,YAM,Sakon,Yamamoto,\N,164,HRT
+30,MSC,Michael,Schumacher,\N,131,Mercedes
+31,MON,Juan,Pablo Montoya,\N,3,Williams
+32,KLI,Christian,Klien,\N,164,HRT
+33,TMO,Tiago,Monteiro,\N,17,Jordan
+34,IDE,Yuji,Ide,\N,8,Super Aguri
+35,VIL,Jacques,Villeneuve,\N,3,Williams
+36,FMO,Franck,Montagny,\N,8,Super Aguri
+37,DLR,Pedro,de la Rosa,\N,164,HRT
+38,DOO,Robert,Doornbos,\N,18,Minardi
+39,KAR,Narain,Karthikeyan,\N,164,HRT
+40,FRI,Patrick,Friesacher,\N,18,Minardi
+41,ZON,Ricardo,Zonta,\N,16,BAR
+42,PIZ,Antônio,Pizzonia,\N,19,Jaguar
+43,\N,Cristiano,da Matta,\N,7,Toyota
+44,\N,Olivier,Panis,\N,27,Ligier
+45,\N,Giorgio,Pantano,\N,17,Jordan
+46,\N,Gianmaria,Bruni,\N,18,Minardi
+47,\N,Zsolt,Baumgartner,\N,17,Jordan
+48,\N,Marc,Gené,\N,18,Minardi
+49,\N,Heinz-Harald,Frentzen,\N,15,Sauber
+50,\N,Jos,Verstappen,\N,22,Benetton
+51,\N,Justin,Wilson,\N,19,Jaguar
+52,\N,Ralph,Firman,\N,17,Jordan
+53,\N,Nicolas,Kiesa,\N,18,Minardi
+54,\N,Luciano,Burti,\N,19,Jaguar
+55,\N,Jean,Alesi,\N,25,Tyrrell
+56,\N,Eddie,Irvine,\N,17,Jordan
+57,\N,Mika,Häkkinen,\N,32,Team Lotus
+58,\N,Tarso,Marques,\N,18,Minardi
+59,\N,Enrique,Bernoldi,\N,21,Arrows
+60,\N,Gastón,Mazzacane,\N,18,Minardi
+61,\N,Tomáš,Enge,\N,20,Prost
+62,\N,Alex,Yoong,\N,18,Minardi
+63,\N,Mika,Salo,\N,32,Team Lotus
+64,\N,Pedro,Diniz,\N,28,Forti
+65,\N,Johnny,Herbert,\N,25,Tyrrell
+66,\N,Allan,McNish,\N,7,Toyota
+67,BUE,Sébastien,Buemi,\N,5,Toro Rosso
+68,\N,Toranosuke,Takagi,\N,25,Tyrrell
+69,BAD,Luca,Badoer,\N,26,Lola
+70,\N,Alessandro,Zanardi,\N,17,Jordan
+71,\N,Damon,Hill,\N,34,Brabham
+72,\N,Stéphane,Sarrazin,\N,18,Minardi
+73,\N,Ricardo,Rosset,\N,29,Footwork
+74,\N,Esteban,Tuero,\N,18,Minardi
+75,\N,Shinji,Nakano,\N,20,Prost
+76,MAG,Jan,Magnussen,\N,1,McLaren
+77,\N,Gerhard,Berger,\N,54,ATS
+78,\N,Nicola,Larini,\N,42,Coloni
+79,\N,Ukyo,Katayama,\N,33,Larrousse
+80,\N,Vincenzo,Sospiri,\N,26,Lola
+81,\N,Gianni,Morbidelli,\N,18,Minardi
+82,\N,Norberto,Fontana,\N,15,Sauber
+83,\N,Pedro,Lamy,\N,32,Team Lotus
+84,\N,Martin,Brundle,\N,25,Tyrrell
+85,\N,Andrea,Montermini,\N,31,Simtek
+86,\N,Giovanni,Lavaggi,\N,30,Pacific
+87,\N,Mark,Blundell,\N,34,Brabham
+88,\N,Aguri,Suzuki,\N,33,Larrousse
+89,\N,Taki,Inoue,\N,31,Simtek
+90,\N,Roberto,Moreno,\N,32,Team Lotus
+91,\N,Karl,Wendlinger,\N,41,Leyton House
+92,\N,Bertrand,Gachot,\N,48,Rial
+93,\N,Domenico,Schiattarella,\N,31,Simtek
+94,\N,Pierluigi,Martini,\N,53,Toleman
+95,\N,Nigel,Mansell,\N,32,Team Lotus
+96,\N,Jean-Christophe,Boullion,\N,15,Sauber
+97,\N,Massimiliano,Papis,\N,29,Footwork
+98,\N,Jean-Denis,Délétraz,\N,33,Larrousse
+99,\N,Gabriele,Tarquini,\N,45,Osella
+100,\N,Érik,Comas,\N,27,Ligier
+101,\N,David,Brabham,\N,34,Brabham
+102,\N,Ayrton,Senna,\N,53,Toleman
+103,\N,Éric,Bernard,\N,33,Larrousse
+104,\N,Christian,Fittipaldi,\N,18,Minardi
+105,\N,Michele,Alboreto,\N,25,Tyrrell
+106,\N,Olivier,Beretta,\N,33,Larrousse
+107,\N,Roland,Ratzenberger,\N,31,Simtek
+108,\N,Paul,Belmondo,\N,37,March
+109,\N,Jyrki,Järvilehto,\N,46,Onyx
+110,\N,Andrea,de Cesaris,\N,51,Alfa Romeo
+111,\N,Jean-Marc,Gounon,\N,18,Minardi
+112,\N,Philippe,Alliot,\N,50,RAM
+113,\N,Philippe,Adams,\N,32,Team Lotus
+114,\N,Yannick,Dalmas,\N,33,Larrousse
+115,\N,Hideki,Noda,\N,33,Larrousse
+116,\N,Franck,Lagorce,\N,27,Ligier
+117,\N,Alain,Prost,\N,1,McLaren
+118,\N,Derek,Warwick,\N,53,Toleman
+119,\N,Riccardo,Patrese,\N,58,Shadow
+120,\N,Fabrizio,Barbazza,\N,39,AGS
+121,\N,Michael,Andretti,\N,1,McLaren
+122,\N,Ivan,Capelli,\N,25,Tyrrell
+123,\N,Thierry,Boutsen,\N,21,Arrows
+124,\N,Marco,Apicella,\N,17,Jordan
+125,\N,Emanuele,Naspetti,\N,37,March
+126,\N,Toshio,Suzuki,\N,33,Larrousse
+127,\N,Maurício,Gugelmin,\N,37,March
+128,\N,Eric,van de Poele,\N,40,Lambo
+129,\N,Olivier,Grouillard,\N,27,Ligier
+130,\N,Andrea,Chiesa,\N,36,Fondmetal
+131,\N,Stefano,Modena,\N,34,Brabham
+132,\N,Giovanna,Amati,\N,34,Brabham
+133,\N,Alex,Caffi,\N,45,Osella
+134,\N,Enrico,Bertaggia,\N,42,Coloni
+135,\N,Perry,McCarthy,\N,38,Andrea Moda
+136,\N,Jan,Lammers,\N,58,Shadow
+137,\N,Nelson,Piquet,\N,34,Brabham
+138,\N,Satoru,Nakajima,\N,32,Team Lotus
+139,\N,Emanuele,Pirro,\N,22,Benetton
+140,\N,Stefan,Johansson,\N,58,Shadow
+141,\N,Julian,Bailey,\N,25,Tyrrell
+142,\N,Pedro,Chaves,\N,42,Coloni
+143,\N,Michael,Bartels,\N,32,Team Lotus
+144,\N,Naoki,Hattori,\N,42,Coloni
+145,\N,Alessandro,Nannini,\N,18,Minardi
+146,\N,Bernd,Schneider,\N,49,Zakspeed
+147,\N,Paolo,Barilla,\N,18,Minardi
+148,\N,Gregor,Foitek,\N,48,Rial
+149,\N,Claudio,Langes,\N,44,Euro Brun
+150,\N,Gary,Brabham,\N,47,Life
+151,\N,Martin,Donnelly,\N,21,Arrows
+152,\N,Bruno,Giacomelli,\N,1,McLaren
+153,ALG,Jaime,Alguersuari,\N,5,Toro Rosso
+154,GRO,Romain,Grosjean,8,210,Haas F1 Team
+155,KOB,Kamui,Kobayashi,10,207,Caterham
+156,\N,Jonathan,Palmer,\N,3,Williams
+157,\N,Christian,Danner,\N,49,Zakspeed
+158,\N,Eddie,Cheever,\N,64,Hesketh
+159,\N,Luis,Pérez-Sala,\N,18,Minardi
+160,\N,Piercarlo,Ghinzani,\N,45,Osella
+161,\N,Volker,Weidler,\N,48,Rial
+162,\N,Pierre-Henri,Raphanel,\N,33,Larrousse
+163,\N,René,Arnoux,\N,63,Surtees
+164,\N,Joachim,Winkelhock,\N,39,AGS
+165,\N,Oscar,Larrauri,\N,44,Euro Brun
+166,\N,Philippe,Streiff,\N,4,Renault
+167,\N,Adrián,Campos,\N,18,Minardi
+168,\N,Jean-Louis,Schlesser,\N,50,RAM
+169,\N,Pascal,Fabre,\N,39,AGS
+170,\N,Teo,Fabi,\N,53,Toleman
+171,\N,Franco,Forini,\N,45,Osella
+172,\N,Jacques,Laffite,\N,80,Iso Marlboro
+173,\N,Elio,de Angelis,\N,58,Shadow
+174,\N,Johnny,Dumfries,\N,32,Team Lotus
+175,\N,Patrick,Tambay,\N,57,Ensign
+176,\N,Marc,Surer,\N,57,Ensign
+177,\N,Keke,Rosberg,\N,54,ATS
+178,\N,Alan,Jones,\N,75,Embassy Hill
+179,\N,Huub,Rothengatter,\N,52,Spirit
+180,\N,Allen,Berg,\N,45,Osella
+181,\N,Manfred,Winkelhock,\N,21,Arrows
+182,\N,Niki,Lauda,\N,200,March-Ford
+183,\N,François,Hesnault,\N,27,Ligier
+184,\N,Mauro,Baldi,\N,21,Arrows
+185,\N,Stefan,Bellof,\N,25,Tyrrell
+186,\N,Kenny,Acheson,\N,50,RAM
+187,\N,John,Watson,\N,34,Brabham
+188,\N,Johnny,Cecotto,\N,55,Theodore
+189,\N,Jo,Gartner,\N,45,Osella
+190,\N,Corrado,Fabi,\N,45,Osella
+191,\N,Mike,Thackwell,\N,25,Tyrrell
+192,\N,Chico,Serra,\N,56,Fittipaldi
+193,\N,Danny,Sullivan,\N,25,Tyrrell
+194,\N,Eliseo,Salazar,\N,57,Ensign
+195,\N,Roberto,Guerrero,\N,57,Ensign
+196,\N,Raul,Boesel,\N,37,March
+197,\N,Jean-Pierre,Jarier,\N,200,March-Ford
+198,\N,Jacques,Villeneuve Sr.,\N,21,Arrows
+199,\N,Carlos,Reutemann,\N,34,Brabham
+200,\N,Jochen,Mass,\N,63,Surtees
+201,\N,Slim,Borgudd,\N,54,ATS
+202,\N,Didier,Pironi,\N,25,Tyrrell
+203,\N,Gilles,Villeneuve,\N,6,Ferrari
+204,\N,Riccardo,Paletti,\N,45,Osella
+205,\N,Brian,Henton,\N,32,Team Lotus
+206,\N,Derek,Daly,\N,57,Ensign
+207,\N,Mario,Andretti,\N,180,Lotus-Ford
+208,\N,Emilio,de Villota,\N,182,Brabham-Ford
+209,\N,Geoff,Lees,\N,57,Ensign
+210,\N,Tommy,Byrne,\N,55,Theodore
+211,\N,Rupert,Keegan,\N,64,Hesketh
+212,\N,Hector,Rebaque,\N,64,Hesketh
+213,\N,Beppe,Gabbiani,\N,63,Surtees
+214,\N,Kevin,Cogan,\N,3,Williams
+215,\N,Miguel Ángel,Guerra,\N,45,Osella
+216,\N,Siegfried,Stohr,\N,21,Arrows
+217,\N,Ricardo,Zunino,\N,182,Brabham-Ford
+218,\N,Ricardo,Londoño,\N,57,Ensign
+219,\N,Jean-Pierre,Jabouille,\N,63,Surtees
+220,\N,Giorgio,Francia,\N,34,Brabham
+221,\N,Patrick,Depailler,\N,25,Tyrrell
+222,\N,Jody,Scheckter,\N,1,McLaren
+223,\N,Clay,Regazzoni,\N,6,Ferrari
+224,\N,Emerson,Fittipaldi,\N,32,Team Lotus
+225,\N,Dave,Kennedy,\N,58,Shadow
+226,\N,Stephen,South,\N,1,McLaren
+227,\N,Tiff,Needell,\N,57,Ensign
+228,\N,Desiré,Wilson,\N,3,Williams
+229,\N,Harald,Ertl,\N,64,Hesketh
+230,\N,Vittorio,Brambilla,\N,37,March
+231,\N,James,Hunt,\N,37,March
+232,\N,Arturo,Merzario,\N,6,Ferrari
+233,\N,Hans-Joachim,Stuck,\N,37,March
+234,\N,Gianfranco,Brancatelli,\N,60,Merzario
+235,\N,Jacky,Ickx,\N,167,Cooper-Maserati
+236,\N,Patrick,Gaillard,\N,57,Ensign
+237,\N,Alex,Ribeiro,\N,64,Hesketh
+238,\N,Ronnie,Peterson,\N,37,March
+239,\N,Brett,Lunger,\N,64,Hesketh
+240,\N,Danny,Ongais,\N,67,Penske
+241,\N,Lamberto,Leoni,\N,63,Surtees
+242,\N,Divina,Galica,\N,63,Surtees
+243,\N,Rolf,Stommelen,\N,34,Brabham
+244,\N,Alberto,Colombo,\N,60,Merzario
+245,\N,Tony,Trimmer,\N,74,Maki
+246,\N,Hans,Binder,\N,59,Wolf
+247,\N,Michael,Bleekemolen,\N,37,March
+248,\N,Carlo,Franchi,\N,63,Surtees
+249,\N,Bobby,Rahal,\N,59,Wolf
+250,\N,Carlos,Pace,\N,37,March
+251,\N,Ian,Scheckter,\N,64,Hesketh
+252,\N,Tom,Pryce,\N,58,Shadow
+253,\N,Ingo,Hoffmann,\N,56,Fittipaldi
+254,\N,Renzo,Zorzi,\N,3,Williams
+255,\N,Gunnar,Nilsson,\N,32,Team Lotus
+256,\N,Larry,Perkins,\N,78,Amon
+257,\N,Boy,Lunger,\N,67,Penske
+258,\N,Patrick,Nève,\N,57,Ensign
+259,\N,David,Purley,\N,37,March
+260,\N,Conny,Andersson,\N,63,Surtees
+261,\N,Bernard,de Dryver,\N,37,March
+262,\N,Jackie,Oliver,\N,180,Lotus-Ford
+263,\N,Mikko,Kozarowitzky,\N,37,March
+264,\N,Andy,Sutcliffe,\N,37,March
+265,\N,Guy,Edwards,\N,26,Lola
+266,\N,Brian,McGuire,\N,69,McGuire
+267,\N,Vern,Schuppan,\N,57,Ensign
+268,\N,Hans,Heyer,\N,67,Penske
+269,\N,Teddy,Pilette,\N,34,Brabham
+270,\N,Ian,Ashley,\N,34,Brabham
+271,\N,Loris,Kessel,\N,182,Brabham-Ford
+272,\N,Kunimitsu,Takahashi,\N,25,Tyrrell
+273,\N,Kazuyoshi,Hoshino,\N,25,Tyrrell
+274,\N,Noritake,Takahara,\N,63,Surtees
+275,\N,Lella,Lombardi,\N,34,Brabham
+276,\N,Bob,Evans,\N,66,BRM
+277,\N,Michel,Leclère,\N,25,Tyrrell
+278,\N,Chris,Amon,\N,176,Lotus-BRM
+279,\N,Emilio,Zapico,\N,3,Williams
+280,\N,Henri,Pescarolo,\N,82,Matra
+281,\N,Jac,Nelleman,\N,182,Brabham-Ford
+282,\N,Damien,Magee,\N,3,Williams
+283,\N,Mike,Wilds,\N,57,Ensign
+284,\N,Alessandro,Pesenti-Rossi,\N,25,Tyrrell
+285,\N,Otto,Stuppacher,\N,25,Tyrrell
+286,\N,Warwick,Brown,\N,59,Wolf
+287,\N,Masahiro,Hasemi,\N,72,Kojima
+288,\N,Mark,Donohue,\N,1,McLaren
+289,\N,Graham,Hill,\N,32,Team Lotus
+290,\N,Wilson,Fittipaldi,\N,34,Brabham
+291,\N,Guy,Tunmer,\N,32,Team Lotus
+292,\N,Eddie,Keizan,\N,25,Tyrrell
+293,\N,Dave,Charlton,\N,180,Lotus-Ford
+294,\N,Tony,Brise,\N,75,Embassy Hill
+295,\N,Roelof,Wunderink,\N,57,Ensign
+296,\N,François,Migault,\N,84,Connew
+297,\N,Torsten,Palm,\N,64,Hesketh
+298,\N,Gijs,van Lennep,\N,63,Surtees
+299,\N,Hiroshi,Fushida,\N,74,Maki
+300,\N,John,Nicholson,\N,76,Lyncar
+301,\N,Dave,Morgan,\N,63,Surtees
+302,\N,Jim,Crawford,\N,32,Team Lotus
+303,\N,Jo,Vonlanthen,\N,3,Williams
+304,\N,Denny,Hulme,\N,183,Brabham-Climax
+305,\N,Mike,Hailwood,\N,26,Lola
+306,\N,Jean-Pierre,Beltoise,\N,187,McLaren-Ford
+307,\N,Howden,Ganley,\N,66,BRM
+308,\N,Richard,Robarts,\N,80,Iso Marlboro
+309,\N,Peter,Revson,\N,176,Lotus-BRM
+310,\N,Paddy,Driver,\N,176,Lotus-BRM
+311,\N,Tom,Belsø,\N,80,Iso Marlboro
+312,\N,Brian,Redman,\N,195,Cooper-BRM
+313,\N,Rikky,von Opel,\N,57,Ensign
+314,\N,Tim,Schenken,\N,86,De Tomaso
+315,\N,Gérard,Larrousse,\N,34,Brabham
+316,\N,Leo,Kinnunen,\N,63,Surtees
+317,\N,Reine,Wisell,\N,32,Team Lotus
+318,\N,Bertil,Roos,\N,58,Shadow
+319,\N,José,Dolhem,\N,63,Surtees
+320,\N,Peter,Gethin,\N,187,McLaren-Ford
+321,\N,Derek,Bell,\N,6,Ferrari
+322,\N,David,Hobbs,\N,66,BRM
+323,\N,Dieter,Quester,\N,63,Surtees
+324,\N,Helmuth,Koinigg,\N,63,Surtees
+325,\N,Carlo,Facetti,\N,34,Brabham
+326,\N,Eppie,Wietzes,\N,180,Lotus-Ford
+327,\N,François,Cevert,\N,37,March
+328,\N,Jackie,Stewart,\N,66,BRM
+329,\N,Mike,Beuttler,\N,200,March-Ford
+330,\N,Nanni,Galli,\N,198,McLaren-Alfa Romeo
+331,\N,Luiz,Bueno,\N,63,Surtees
+332,\N,George,Follmer,\N,58,Shadow
+333,\N,Andrea,de Adamich,\N,6,Ferrari
+334,\N,Jackie,Pretorius,\N,185,LDS-Alfa Romeo
+335,\N,Roger,Williamson,\N,37,March
+336,\N,Graham,McRae,\N,80,Iso Marlboro
+337,\N,Helmut,Marko,\N,66,BRM
+338,\N,David,Walker,\N,201,Lotus-Pratt &amp; Whitney
+339,\N,Alex,Soler-Roig,\N,32,Team Lotus
+340,\N,John,Love,\N,170,Cooper-Climax
+341,\N,John,Surtees,\N,32,Team Lotus
+342,\N,Skip,Barber,\N,200,March-Ford
+343,\N,Bill,Brack,\N,180,Lotus-Ford
+344,\N,Sam,Posey,\N,63,Surtees
+345,\N,Pedro,Rodríguez,\N,172,Lotus-Climax
+346,\N,Jo,Siffert,\N,176,Lotus-BRM
+347,\N,Jo,Bonnier,\N,105,Maserati
+348,\N,François,Mazet,\N,200,March-Ford
+349,\N,Max,Jean,\N,200,March-Ford
+350,\N,Vic,Elford,\N,195,Cooper-BRM
+351,\N,Silvio,Moser,\N,193,Cooper-ATS
+352,\N,George,Eaton,\N,66,BRM
+353,\N,Pete,Lovely,\N,32,Team Lotus
+354,\N,Chris,Craft,\N,34,Brabham
+355,\N,John,Cannon,\N,66,BRM
+356,\N,Jack,Brabham,\N,87,Cooper
+357,\N,John,Miles,\N,180,Lotus-Ford
+358,\N,Jochen,Rindt,\N,181,Brabham-BRM
+359,\N,Johnny,Servoz-Gavin,\N,82,Matra
+360,\N,Bruce,McLaren,\N,87,Cooper
+361,\N,Piers,Courage,\N,66,BRM
+362,\N,Peter,de Klerk,\N,51,Alfa Romeo
+363,\N,Ignazio,Giunti,\N,6,Ferrari
+364,\N,Dan,Gurney,\N,6,Ferrari
+365,\N,Hubert,Hahne,\N,26,Lola
+366,\N,Gus,Hutchison,\N,34,Brabham
+367,\N,Peter,Westbury,\N,66,BRM
+368,\N,Sam,Tingle,\N,172,Lotus-Climax
+369,\N,Basil,van Rooyen,\N,170,Cooper-Climax
+370,\N,Richard,Attwood,\N,66,BRM
+371,\N,Al,Pease,\N,189,Eagle-Climax
+372,\N,John,Cordts,\N,183,Brabham-Climax
+373,\N,Jim,Clark,\N,32,Team Lotus
+374,\N,Mike,Spence,\N,172,Lotus-Climax
+375,\N,Ludovico,Scarfiotti,\N,6,Ferrari
+376,BIA,Lucien,Bianchi,\N,170,Cooper-Climax
+377,\N,Jo,Schlesser,\N,82,Matra
+378,\N,Robin,Widdows,\N,195,Cooper-BRM
+379,\N,Kurt,Ahrens,\N,90,Protos
+380,\N,Frank,Gardner,\N,182,Brabham-Ford
+381,\N,Bobby,Unser,\N,66,BRM
+382,\N,Moisés,Solana,\N,66,BRM
+383,\N,Bob,Anderson,\N,26,Lola
+384,\N,Luki,Botha,\N,183,Brabham-Climax
+385,\N,Lorenzo,Bandini,\N,167,Cooper-Maserati
+386,\N,Richie,Ginther,\N,6,Ferrari
+387,\N,Mike,Parkes,\N,123,Fry
+388,\N,Chris,Irwin,\N,183,Brabham-Climax
+389,\N,Guy,Ligier,\N,167,Cooper-Maserati
+390,\N,Alan,Rees,\N,182,Brabham-Ford
+391,\N,Brian,Hart,\N,90,Protos
+392,\N,Mike,Fisher,\N,176,Lotus-BRM
+393,\N,Tom,Jones,\N,170,Cooper-Climax
+394,\N,Giancarlo,Baghetti,\N,6,Ferrari
+395,\N,Jonathan,Williams,\N,6,Ferrari
+396,\N,Bob,Bondurant,\N,176,Lotus-BRM
+397,\N,Peter,Arundell,\N,32,Team Lotus
+398,\N,Vic,Wilson,\N,170,Cooper-Climax
+399,\N,John,Taylor,\N,170,Cooper-Climax
+400,\N,Chris,Lawrence,\N,192,Cooper-Ferrari
+401,\N,Trevor,Taylor,\N,170,Cooper-Climax
+402,\N,Giacomo,Russo,\N,181,Brabham-BRM
+403,\N,Phil,Hill,\N,6,Ferrari
+404,\N,Innes,Ireland,\N,32,Team Lotus
+405,\N,Ronnie,Bucknum,\N,11,Honda
+406,\N,Paul,Hawkins,\N,172,Lotus-Climax
+407,\N,David,Prophet,\N,34,Brabham
+408,\N,Tony,Maggs,\N,172,Lotus-Climax
+409,\N,Trevor,Blokdyk,\N,167,Cooper-Maserati
+410,\N,Neville,Lederle,\N,172,Lotus-Climax
+411,\N,Doug,Serrurier,\N,89,LDS
+412,\N,Brausch,Niemann,\N,180,Lotus-Ford
+413,\N,Ernie,Pieterse,\N,172,Lotus-Climax
+414,\N,Clive,Puzey,\N,172,Lotus-Climax
+415,\N,Ray,Reed,\N,93,RE
+416,\N,David,Clapham,\N,167,Cooper-Maserati
+417,\N,Alex,Blignaut,\N,170,Cooper-Climax
+418,\N,Masten,Gregory,\N,105,Maserati
+419,\N,John,Rhodes,\N,170,Cooper-Climax
+420,\N,Ian,Raby,\N,97,Gilby
+421,\N,Alan,Rollinson,\N,186,Cooper-Ford
+422,\N,Brian,Gubby,\N,172,Lotus-Climax
+423,\N,Gerhard,Mitter,\N,95,Porsche
+424,\N,Roberto,Bussinello,\N,175,De Tomaso-Alfa Romeo
+425,\N,Nino,Vaccarella,\N,175,De Tomaso-Alfa Romeo
+426,\N,Giorgio,Bassi,\N,66,BRM
+427,\N,Maurice,Trintignant,\N,141,Simca
+428,\N,Bernard,Collomb,\N,170,Cooper-Climax
+429,\N,André,Pilette,\N,154,Talbot-Lago
+430,\N,Carel Godin,de Beaufort,\N,95,Porsche
+431,\N,Edgar,Barth,\N,146,EMW
+432,\N,Mário de Araújo,Cabral,\N,167,Cooper-Maserati
+433,\N,Walt,Hansgen,\N,170,Cooper-Climax
+434,\N,Hap,Sharp,\N,170,Cooper-Climax
+435,\N,Willy,Mairesse,\N,6,Ferrari
+436,\N,John,Campbell-Jones,\N,170,Cooper-Climax
+437,\N,Ian,Burgess,\N,87,Cooper
+438,\N,Tony,Settember,\N,99,Emeryson
+439,\N,Nasif,Estéfano,\N,105,Maserati
+440,\N,Jim,Hall,\N,32,Team Lotus
+441,\N,Tim,Parnell,\N,170,Cooper-Climax
+442,\N,Kurt,Kuhnke,\N,177,Lotus-Borgward
+443,\N,Ernesto,Brambilla,\N,167,Cooper-Maserati
+444,\N,Roberto,Lippi,\N,174,De Tomaso-Osca
+445,\N,Günther,Seiffert,\N,176,Lotus-BRM
+446,\N,Carlo,Abate,\N,172,Lotus-Climax
+447,\N,Gaetano,Starrabba,\N,173,Lotus-Maserati
+448,\N,Peter,Broeker,\N,98,Stebro
+449,\N,Rodger,Ward,\N,139,Bromme
+450,\N,Ernie,de Vos,\N,98,Stebro
+451,\N,Frank,Dochnal,\N,170,Cooper-Climax
+452,\N,Thomas,Monarch,\N,172,Lotus-Climax
+842,GAS,Pierre,Gasly,10,214,Alpine F1 Team
+453,\N,Jackie,Lewis,\N,170,Cooper-Climax
+454,\N,Ricardo,Rodríguez,\N,6,Ferrari
+455,\N,Wolfgang,Seidel,\N,144,Veritas
+456,\N,Roy,Salvadori,\N,6,Ferrari
+457,\N,Ben,Pon,\N,95,Porsche
+458,\N,Rob,Slotemaker,\N,95,Porsche
+459,\N,Tony,Marsh,\N,87,Cooper
+460,\N,Gerry,Ashmore,\N,172,Lotus-Climax
+461,\N,Heinz,Schiller,\N,176,Lotus-BRM
+462,\N,Colin,Davis,\N,167,Cooper-Maserati
+463,\N,Jay,Chamberlain,\N,172,Lotus-Climax
+464,\N,Tony,Shelly,\N,176,Lotus-BRM
+465,\N,Keith,Greene,\N,170,Cooper-Climax
+466,\N,Heini,Walter,\N,95,Porsche
+467,\N,Ernesto,Prinoth,\N,172,Lotus-Climax
+468,\N,Roger,Penske,\N,170,Cooper-Climax
+469,\N,Rob,Schroeder,\N,172,Lotus-Climax
+470,\N,Timmy,Mayer,\N,170,Cooper-Climax
+471,\N,Bruce,Johnstone,\N,66,BRM
+472,\N,Mike,Harris,\N,178,Cooper-Alfa Romeo
+473,\N,Gary,Hocking,\N,172,Lotus-Climax
+474,\N,Syd,van der Vyver,\N,172,Lotus-Climax
+475,\N,Stirling,Moss,\N,133,HWM
+476,\N,Wolfgang,von Trips,\N,6,Ferrari
+477,\N,Cliff,Allison,\N,32,Team Lotus
+478,\N,Hans,Herrmann,\N,144,Veritas
+479,\N,Tony,Brooks,\N,66,BRM
+480,\N,Michael,May,\N,172,Lotus-Climax
+481,\N,Henry,Taylor,\N,170,Cooper-Climax
+482,\N,Olivier,Gendebien,\N,6,Ferrari
+483,\N,Giorgio,Scarlatti,\N,6,Ferrari
+484,\N,Brian,Naylor,\N,87,Cooper
+485,\N,Juan Manuel,Bordeu,\N,172,Lotus-Climax
+486,\N,Jack,Fairman,\N,125,Connaught
+487,\N,Massimo,Natili,\N,167,Cooper-Maserati
+488,\N,Peter,Monteverdi,\N,103,MBM
+489,\N,Renato,Pirocchi,\N,167,Cooper-Maserati
+490,\N,Geoff,Duke,\N,170,Cooper-Climax
+491,\N,Alfonso,Thiele,\N,167,Cooper-Maserati
+492,\N,Menato,Boffa,\N,170,Cooper-Climax
+493,\N,Peter,Ryan,\N,172,Lotus-Climax
+494,\N,Lloyd,Ruby,\N,107,Watson
+495,\N,Ken,Miles,\N,172,Lotus-Climax
+496,\N,Carlos,Menditeguy,\N,128,Gordini
+497,\N,Alberto Rodriguez,Larreta,\N,32,Team Lotus
+498,\N,José Froilán,González,\N,105,Maserati
+499,\N,Roberto,Bonomi,\N,167,Cooper-Maserati
+500,\N,Gino,Munaron,\N,171,Cooper-Castellotti
+501,\N,Harry,Schell,\N,154,Talbot-Lago
+502,\N,Alan,Stacey,\N,32,Team Lotus
+503,\N,Ettore,Chimeri,\N,105,Maserati
+504,\N,Antonio,Creus,\N,105,Maserati
+505,\N,Chris,Bristow,\N,169,Cooper-Borgward
+506,\N,Bruce,Halford,\N,105,Maserati
+507,\N,Chuck,Daigh,\N,106,Scarab
+508,\N,Lance,Reventlow,\N,170,Cooper-Climax
+509,\N,Jim,Rathmann,\N,160,Wetteroth
+510,\N,Paul,Goldsmith,\N,113,Kurtis Kraft
+511,\N,Don,Branson,\N,109,Phillips
+512,\N,Johnny,Thomson,\N,143,Del Roy
+513,\N,Eddie,Johnson,\N,111,Trevis
+514,\N,Bob,Veith,\N,113,Kurtis Kraft
+515,\N,Bud,Tingelstad,\N,111,Trevis
+516,\N,Bob,Christie,\N,113,Kurtis Kraft
+517,\N,Red,Amick,\N,113,Kurtis Kraft
+518,\N,Duane,Carter,\N,129,Stevens
+519,\N,Bill,Homeier,\N,113,Kurtis Kraft
+520,\N,Gene,Hartley,\N,157,Langley
+521,\N,Chuck,Stevenson,\N,156,Marchese
+522,\N,Bobby,Grim,\N,113,Kurtis Kraft
+523,\N,Shorty,Templeman,\N,111,Trevis
+524,\N,Jim,Hurtubise,\N,115,Christensen
+525,\N,Jimmy,Bryan,\N,113,Kurtis Kraft
+526,\N,Troy,Ruttman,\N,110,Lesovsky
+527,\N,Eddie,Sachs,\N,114,Kuzma
+528,\N,Don,Freeland,\N,107,Watson
+529,\N,Tony,Bettenhausen,\N,113,Kurtis Kraft
+530,\N,Wayne,Weiler,\N,108,Epperly
+531,\N,Anthony,Foyt,\N,114,Kuzma
+532,\N,Eddie,Russo,\N,135,Pawl
+533,\N,Johnny,Boyd,\N,113,Kurtis Kraft
+534,\N,Gene,Force,\N,113,Kurtis Kraft
+535,\N,Jim,McWithey,\N,113,Kurtis Kraft
+536,\N,Len,Sutton,\N,113,Kurtis Kraft
+537,\N,Dick,Rathmann,\N,107,Watson
+538,\N,Al,Herman,\N,113,Kurtis Kraft
+539,\N,Dempsey,Wilson,\N,114,Kuzma
+540,\N,Mike,Taylor,\N,170,Cooper-Climax
+541,\N,Ron,Flockhart,\N,105,Maserati
+542,\N,David,Piper,\N,32,Team Lotus
+543,\N,Giulio,Cabianca,\N,105,Maserati
+544,\N,Piero,Drogo,\N,170,Cooper-Climax
+545,\N,Fred,Gamble,\N,104,Behra-Porsche
+546,\N,Arthur,Owen,\N,170,Cooper-Climax
+547,\N,Horace,Gould,\N,87,Cooper
+548,\N,Bob,Drake,\N,105,Maserati
+549,\N,Ivor,Bueb,\N,105,Maserati
+550,\N,Alain,de Changy,\N,170,Cooper-Climax
+551,\N,Maria,de Filippis,\N,105,Maserati
+552,\N,Jean,Lucienbonnet,\N,170,Cooper-Climax
+553,\N,André,Testut,\N,105,Maserati
+554,\N,Jean,Behra,\N,128,Gordini
+555,\N,Paul,Russo,\N,138,Nichels
+556,\N,Jimmy,Daywalt,\N,113,Kurtis Kraft
+557,\N,Chuck,Arnold,\N,113,Kurtis Kraft
+558,\N,Al,Keller,\N,113,Kurtis Kraft
+559,\N,Pat,Flaherty,\N,113,Kurtis Kraft
+560,\N,Bill,Cheesbourg,\N,113,Kurtis Kraft
+561,\N,Ray,Crawford,\N,113,Kurtis Kraft
+562,\N,Jack,Turner,\N,113,Kurtis Kraft
+563,\N,Chuck,Weyant,\N,113,Kurtis Kraft
+564,\N,Jud,Larson,\N,107,Watson
+565,\N,Mike,Magill,\N,113,Kurtis Kraft
+566,\N,Carroll,Shelby,\N,105,Maserati
+567,\N,Fritz,d'Orey,\N,124,Tec-Mec
+568,\N,Azdrubal,Fontes,\N,105,Maserati
+569,\N,Peter,Ashdown,\N,170,Cooper-Climax
+570,\N,Bill,Moss,\N,170,Cooper-Climax
+571,\N,Dennis,Taylor,\N,32,Team Lotus
+572,\N,Harry,Blanchard,\N,95,Porsche
+573,\N,Alessandro,de Tomaso,\N,6,Ferrari
+574,\N,George,Constantine,\N,169,Cooper-Borgward
+575,\N,Bob,Said,\N,125,Connaught
+576,\N,Phil,Cade,\N,105,Maserati
+577,\N,Luigi,Musso,\N,105,Maserati
+578,\N,Mike,Hawthorn,\N,87,Cooper
+579,\N,Juan,Fangio,\N,51,Alfa Romeo
+580,\N,Paco,Godia,\N,105,Maserati
+581,\N,Peter,Collins,\N,133,HWM
+582,\N,Ken,Kavanagh,\N,105,Maserati
+583,\N,Gerino,Gerini,\N,105,Maserati
+584,\N,Bruce,Kessler,\N,125,Connaught
+585,\N,Paul,Emery,\N,99,Emeryson
+586,\N,Luigi,Piotti,\N,137,Arzani-Volpini
+587,\N,Bernie,Ecclestone,\N,125,Connaught
+588,\N,Luigi,Taramazzo,\N,105,Maserati
+589,\N,Louis,Chiron,\N,105,Maserati
+590,\N,Stuart,Lewis-Evans,\N,118,Vanwall
+591,\N,George,Amick,\N,108,Epperly
+592,\N,Jimmy,Reece,\N,113,Kurtis Kraft
+593,\N,Johnnie,Parsons,\N,113,Kurtis Kraft
+594,\N,Johnnie,Tolan,\N,113,Kurtis Kraft
+595,\N,Billy,Garrett,\N,114,Kuzma
+596,\N,Ed,Elisian,\N,129,Stevens
+597,\N,Pat,O'Connor,\N,113,Kurtis Kraft
+598,\N,Jerry,Unser,\N,113,Kurtis Kraft
+599,\N,Art,Bisch,\N,114,Kuzma
+600,\N,Christian,Goethals,\N,87,Cooper
+601,\N,Dick,Gibson,\N,87,Cooper
+602,\N,Robert,La Caze,\N,87,Cooper
+603,\N,André,Guelfi,\N,87,Cooper
+604,\N,François,Picard,\N,87,Cooper
+605,\N,Tom,Bridger,\N,87,Cooper
+606,\N,Alfonso,de Portago,\N,6,Ferrari
+607,\N,Cesare,Perdisa,\N,105,Maserati
+608,\N,Eugenio,Castellotti,\N,6,Ferrari
+609,\N,André,Simon,\N,141,Simca
+610,\N,Les,Leston,\N,125,Connaught
+611,\N,Sam,Hanks,\N,113,Kurtis Kraft
+612,\N,Andy,Linden,\N,149,Sherman
+613,\N,Marshall,Teague,\N,113,Kurtis Kraft
+614,\N,Don,Edmunds,\N,113,Kurtis Kraft
+615,\N,Fred,Agabashian,\N,113,Kurtis Kraft
+616,\N,Elmer,George,\N,113,Kurtis Kraft
+617,\N,Mike,MacDowel,\N,87,Cooper
+618,\N,Herbert,MacKay-Fraser,\N,66,BRM
+619,\N,Bob,Gerard,\N,151,ERA
+620,\N,Umberto,Maglioli,\N,6,Ferrari
+621,\N,Paul,England,\N,87,Cooper
+622,\N,Chico,Landi,\N,6,Ferrari
+623,\N,Alberto,Uria,\N,105,Maserati
+624,\N,Hernando,da Silva Ramos,\N,128,Gordini
+625,\N,Élie,Bayol,\N,127,OSCA
+626,\N,Robert,Manzon,\N,141,Simca
+627,\N,Louis,Rosier,\N,154,Talbot-Lago
+628,\N,Bob,Sweikert,\N,113,Kurtis Kraft
+629,\N,Cliff,Griffith,\N,113,Kurtis Kraft
+630,\N,Duke,Dinsmore,\N,113,Kurtis Kraft
+631,\N,Keith,Andrews,\N,134,Schroeder
+632,\N,Paul,Frère,\N,141,Simca
+633,\N,Luigi,Villoresi,\N,6,Ferrari
+634,\N,Piero,Scotti,\N,125,Connaught
+635,\N,Colin,Chapman,\N,118,Vanwall
+636,\N,Desmond,Titterington,\N,125,Connaught
+637,\N,Archie,Scott Brown,\N,125,Connaught
+638,\N,Ottorino,Volonterio,\N,105,Maserati
+639,\N,André,Milhoux,\N,128,Gordini
+640,\N,Toulo,de Graffenried,\N,105,Maserati
+641,\N,Piero,Taruffi,\N,51,Alfa Romeo
+642,\N,Nino,Farina,\N,51,Alfa Romeo
+643,\N,Roberto,Mieres,\N,128,Gordini
+644,\N,Sergio,Mantovani,\N,105,Maserati
+645,\N,Clemar,Bucci,\N,128,Gordini
+646,\N,Jesús,Iglesias,\N,128,Gordini
+647,\N,Alberto,Ascari,\N,6,Ferrari
+648,\N,Karl,Kling,\N,131,Mercedes
+649,\N,Pablo,Birger,\N,141,Simca
+650,\N,Jacques,Pollet,\N,128,Gordini
+651,\N,Lance,Macklin,\N,133,HWM
+652,\N,Ted,Whiteaway,\N,133,HWM
+653,\N,Jimmy,Davies,\N,116,Ewing
+654,\N,Walt,Faulkner,\N,113,Kurtis Kraft
+655,\N,Cal,Niday,\N,113,Kurtis Kraft
+656,\N,Art,Cross,\N,113,Kurtis Kraft
+657,\N,Bill,Vukovich,\N,111,Trevis
+658,\N,Jack,McGrath,\N,113,Kurtis Kraft
+659,\N,Jerry,Hoyt,\N,113,Kurtis Kraft
+660,\N,Johnny,Claes,\N,154,Talbot-Lago
+661,\N,Peter,Walker,\N,151,ERA
+662,\N,Mike,Sparken,\N,128,Gordini
+663,\N,Ken,Wharton,\N,87,Cooper
+664,\N,Kenneth,McAlpine,\N,125,Connaught
+665,\N,Leslie,Marr,\N,125,Connaught
+666,\N,Tony,Rolt,\N,151,ERA
+667,\N,John,Fitch,\N,133,HWM
+668,\N,Jean,Lucas,\N,128,Gordini
+669,\N,Prince,Bira,\N,105,Maserati
+670,\N,Onofre,Marimón,\N,105,Maserati
+671,\N,Roger,Loyer,\N,128,Gordini
+672,\N,Jorge,Daponte,\N,105,Maserati
+673,\N,Mike,Nazaruk,\N,113,Kurtis Kraft
+674,\N,Larry,Crockett,\N,113,Kurtis Kraft
+675,\N,Manny,Ayulo,\N,113,Kurtis Kraft
+676,\N,Frank,Armi,\N,113,Kurtis Kraft
+677,\N,Travis,Webb,\N,105,Maserati
+678,\N,Len,Duncan,\N,134,Schroeder
+679,\N,Ernie,McCoy,\N,129,Stevens
+680,\N,Jacques,Swaters,\N,154,Talbot-Lago
+681,\N,Georges,Berger,\N,141,Simca
+682,\N,Don,Beauman,\N,125,Connaught
+683,\N,Leslie,Thorne,\N,125,Connaught
+684,\N,Bill,Whitehouse,\N,125,Connaught
+685,\N,John,Riseley-Prichard,\N,125,Connaught
+686,\N,Reg,Parnell,\N,105,Maserati
+687,\N,Peter,Whitehead,\N,6,Ferrari
+688,\N,Eric,Brandon,\N,87,Cooper
+689,\N,Alan,Brown,\N,87,Cooper
+690,\N,Rodney,Nuckey,\N,87,Cooper
+691,\N,Hermann,Lang,\N,105,Maserati
+692,\N,Theo,Helfrich,\N,144,Veritas
+693,\N,Fred,Wacker,\N,128,Gordini
+694,\N,Giovanni,de Riu,\N,105,Maserati
+695,\N,Oscar,Gálvez,\N,105,Maserati
+696,\N,John,Barber,\N,87,Cooper
+697,\N,Felice,Bonetto,\N,163,Milano
+698,\N,Adolfo,Cruz,\N,87,Cooper
+699,\N,Duke,Nalon,\N,113,Kurtis Kraft
+700,\N,Carl,Scarborough,\N,113,Kurtis Kraft
+701,\N,Bill,Holland,\N,150,Deidt
+702,\N,Bob,Scott,\N,113,Kurtis Kraft
+703,\N,Arthur,Legat,\N,144,Veritas
+704,\N,Yves,Cabantous,\N,154,Talbot-Lago
+705,\N,Tony,Crook,\N,148,Frazer Nash
+706,\N,Jimmy,Stewart,\N,87,Cooper
+707,\N,Ian,Stewart,\N,125,Connaught
+708,\N,Duncan,Hamilton,\N,154,Talbot-Lago
+709,\N,Ernst,Klodwig,\N,145,BMW
+710,\N,Rudolf,Krause,\N,145,BMW
+711,\N,Oswald,Karch,\N,144,Veritas
+712,\N,Willi,Heeks,\N,147,AFM
+713,\N,Theo,Fitzau,\N,147,AFM
+714,\N,Kurt,Adolff,\N,6,Ferrari
+715,\N,Günther,Bechem,\N,145,BMW
+716,\N,Erwin,Bauer,\N,144,Veritas
+717,\N,Hans,von Stuck,\N,6,Ferrari
+718,\N,Ernst,Loof,\N,144,Veritas
+719,\N,Albert,Scherrer,\N,133,HWM
+720,\N,Max,de Terra,\N,141,Simca
+721,\N,Peter,Hirt,\N,144,Veritas
+722,\N,Piero,Carini,\N,6,Ferrari
+723,\N,Rudi,Fischer,\N,6,Ferrari
+724,\N,Toni,Ulmen,\N,144,Veritas
+725,\N,George,Abecassis,\N,133,HWM
+726,\N,George,Connor,\N,110,Lesovsky
+727,\N,Jim,Rigsby,\N,107,Watson
+728,\N,Joe,James,\N,107,Watson
+729,\N,Bill,Schindler,\N,162,Snowberger
+730,\N,George,Fonder,\N,149,Sherman
+731,\N,Henry,Banks,\N,105,Maserati
+732,\N,Johnny,McDowell,\N,113,Kurtis Kraft
+733,\N,Chet,Miller,\N,113,Kurtis Kraft
+734,\N,Bobby,Ball,\N,134,Schroeder
+735,\N,Charles,de Tornaco,\N,6,Ferrari
+736,\N,Roger,Laurent,\N,6,Ferrari
+737,\N,Robert,O'Brien,\N,141,Simca
+738,\N,Tony,Gaze,\N,133,HWM
+739,\N,Robin,Montgomerie-Charrington,\N,152,Aston Butterworth
+740,\N,Franco,Comotti,\N,105,Maserati
+741,\N,Philippe,Étancelin,\N,154,Talbot-Lago
+742,\N,Dennis,Poore,\N,125,Connaught
+743,\N,Eric,Thompson,\N,125,Connaught
+744,\N,Ken,Downing,\N,125,Connaught
+745,\N,Graham,Whitehead,\N,126,Alta
+746,\N,Gino,Bianco,\N,105,Maserati
+747,\N,David,Murray,\N,105,Maserati
+748,\N,Eitel,Cantoni,\N,105,Maserati
+749,\N,Bill,Aston,\N,152,Aston Butterworth
+750,\N,Adolf,Brudes,\N,144,Veritas
+751,\N,Fritz,Riess,\N,144,Veritas
+752,\N,Helmut,Niedermayr,\N,147,AFM
+753,\N,Hans,Klenk,\N,144,Veritas
+754,\N,Marcel,Balsa,\N,145,BMW
+755,\N,Rudolf,Schoeller,\N,6,Ferrari
+756,\N,Paul,Pietsch,\N,105,Maserati
+757,\N,Josef,Peters,\N,144,Veritas
+758,\N,Dries,van der Lof,\N,133,HWM
+759,\N,Jan,Flinterman,\N,105,Maserati
+760,\N,Piero,Dusio,\N,153,Cisitalia
+761,\N,Alberto,Crespo,\N,105,Maserati
+762,\N,Franco,Rol,\N,105,Maserati
+763,\N,Consalvo,Sanesi,\N,51,Alfa Romeo
+764,\N,Guy,Mairesse,\N,154,Talbot-Lago
+765,\N,Henri,Louveau,\N,154,Talbot-Lago
+766,\N,Lee,Wallard,\N,119,Moore
+767,\N,Carl,Forberg,\N,113,Kurtis Kraft
+768,\N,Mauri,Rose,\N,150,Deidt
+769,\N,Bill,Mackey,\N,155,Hall
+770,\N,Cecil,Green,\N,113,Kurtis Kraft
+771,\N,Walt,Brown,\N,113,Kurtis Kraft
+772,\N,Mack,Hellings,\N,113,Kurtis Kraft
+773,\N,Pierre,Levegh,\N,154,Talbot-Lago
+774,\N,Eugène,Chaboud,\N,154,Talbot-Lago
+775,\N,Aldo,Gordini,\N,141,Simca
+776,\N,Joe,Kelly,\N,126,Alta
+777,\N,Philip,Fotheringham-Parker,\N,105,Maserati
+778,\N,Brian,Shawe Taylor,\N,105,Maserati
+779,\N,John,James,\N,105,Maserati
+780,\N,Toni,Branca,\N,105,Maserati
+781,\N,Ken,Richardson,\N,66,BRM
+782,\N,Juan,Jover,\N,105,Maserati
+783,\N,Georges,Grignard,\N,154,Talbot-Lago
+784,\N,David,Hampshire,\N,105,Maserati
+785,\N,Geoff,Crossley,\N,126,Alta
+786,\N,Luigi,Fagioli,\N,51,Alfa Romeo
+787,\N,Cuth,Harrison,\N,151,ERA
+788,\N,Joe,Fry,\N,105,Maserati
+789,\N,Eugène,Martin,\N,154,Talbot-Lago
+790,\N,Leslie,Johnson,\N,151,ERA
+791,\N,Clemente,Biondetti,\N,6,Ferrari
+792,\N,Alfredo,Pián,\N,105,Maserati
+793,\N,Raymond,Sommer,\N,154,Talbot-Lago
+794,\N,Joie,Chitwood,\N,113,Kurtis Kraft
+795,\N,Myron,Fohr,\N,156,Marchese
+796,\N,Walt,Ader,\N,158,Rae
+797,\N,Jackie,Holmes,\N,159,Olson
+798,\N,Bayliss,Levrett,\N,161,Adams
+799,\N,Jimmy,Jackson,\N,113,Kurtis Kraft
+800,\N,Nello,Pagani,\N,105,Maserati
+801,\N,Charles,Pozzi,\N,154,Talbot-Lago
+802,\N,Dorino,Serafini,\N,6,Ferrari
+803,\N,Bill,Cantrell,\N,161,Adams
+804,\N,Johnny,Mantz,\N,113,Kurtis Kraft
+805,\N,Danny,Kladis,\N,139,Bromme
+806,\N,Óscar,González,\N,105,Maserati
+807,HUL,Nico,Hülkenberg,27,210,Haas F1 Team
+808,PET,Vitaly,Petrov,\N,207,Caterham
+810,DIG,Lucas,di Grassi,\N,166,Virgin
+811,SEN,Bruno,Senna,\N,3,Williams
+812,CHA,Karun,Chandhok,\N,205,Lotus
+813,MAL,Pastor,Maldonado,13,208,Lotus F1
+814,DIR,Paul,di Resta,40,3,Williams
+815,PER,Sergio,Pérez,11,9,Red Bull
+816,DAM,Jérôme,d'Ambrosio,\N,208,Lotus F1
+817,RIC,Daniel,Ricciardo,3,215,RB F1 Team
+818,VER,Jean-Éric,Vergne,25,5,Toro Rosso
+819,PIC,Charles,Pic,\N,207,Caterham
+820,CHI,Max,Chilton,4,206,Marussia
+821,GUT,Esteban,Gutiérrez,21,210,Haas F1 Team
+822,BOT,Valtteri,Bottas,77,15,Sauber
+823,VDG,Giedo,van der Garde,\N,207,Caterham
+824,BIA,Jules,Bianchi,17,206,Marussia
+825,MAG,Kevin,Magnussen,20,210,Haas F1 Team
+826,KVY,Daniil,Kvyat,26,213,AlphaTauri
+827,LOT,André,Lotterer,45,207,Caterham
+828,ERI,Marcus,Ericsson,9,15,Sauber
+829,STE,Will,Stevens,28,209,Manor Marussia
+830,VER,Max,Verstappen,33,9,Red Bull
+831,NAS,Felipe,Nasr,12,15,Sauber
+832,SAI,Carlos,Sainz,55,6,Ferrari
+833,MER,Roberto,Merhi,98,209,Manor Marussia
+834,RSS,Alexander,Rossi,53,209,Manor Marussia
+835,PAL,Jolyon,Palmer,30,4,Renault
+836,WEH,Pascal,Wehrlein,94,15,Sauber
+837,HAR,Rio,Haryanto,88,209,Manor Marussia
+838,VAN,Stoffel,Vandoorne,2,1,McLaren
+839,OCO,Esteban,Ocon,31,214,Alpine F1 Team
+840,STR,Lance,Stroll,18,117,Aston Martin
+841,GIO,Antonio,Giovinazzi,99,51,Alfa Romeo
+843,HAR,Brendon,Hartley,28,5,Toro Rosso
+844,LEC,Charles,Leclerc,16,6,Ferrari
+845,SIR,Sergey,Sirotkin,35,3,Williams
+846,NOR,Lando,Norris,4,1,McLaren
+847,RUS,George,Russell,63,131,Mercedes
+848,ALB,Alexander,Albon,23,3,Williams
+849,LAT,Nicholas,Latifi,6,3,Williams
+850,FIT,Pietro,Fittipaldi,51,210,Haas F1 Team
+851,AIT,Jack,Aitken,89,3,Williams
+852,TSU,Yuki,Tsunoda,22,215,RB F1 Team
+853,MAZ,Nikita,Mazepin,9,210,Haas F1 Team
+854,MSC,Mick,Schumacher,47,210,Haas F1 Team
+855,ZHO,Guanyu,Zhou,24,15,Sauber
+856,DEV,Nyck,de Vries,21,213,AlphaTauri
+857,PIA,Oscar,Piastri,81,1,McLaren
+858,SAR,Logan,Sargeant,2,3,Williams
+859,LAW,Liam,Lawson,30,215,RB F1 Team
+860,BEA,Oliver,Bearman,38,210,Haas F1 Team
+861,COL,Franco,Colapinto,43,3,Williams
+862,DOO,Jack,Doohan,61,214,Alpine F1 Team

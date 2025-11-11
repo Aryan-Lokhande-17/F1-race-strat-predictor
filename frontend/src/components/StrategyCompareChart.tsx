@@ -10,48 +10,45 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-type Stint = [string, number];
+export type Stint = [string, number];
 
-// Compound Colors
+// Colors for compounds
 const COMPOUND_COLORS: Record<string, string> = {
   SOFT: "rgba(255, 80, 80, 0.95)",
   MEDIUM: "rgba(255, 215, 0, 0.95)",
   HARD: "rgba(200, 200, 200, 0.95)",
 };
 
-// Allows dynamic keys: A0, A1, B0, B1, etc.
+// Row format to allow dynamic stint-key columns
 type Row = {
   lap: number;
   delta: number | null;
   [key: string]: number | null;
 };
 
-
+// ✅ Improved Δ pace per stint
 function stintBasedDelta(laps: number[], strategy: [string, number][]) {
   const deltas: (number | null)[] = Array(laps.length).fill(null);
   let lapIndex = 0;
 
-  strategy.forEach(([, stintLaps]) => {
-    if (lapIndex >= laps.length) return;
-
-    const stintStartTime = laps[lapIndex]; // baseline at start of stint
+  for (const [, stintLaps] of strategy) {
+    if (lapIndex >= laps.length) break;
+    const baseline = laps[lapIndex];
 
     for (let i = 0; i < stintLaps && lapIndex < laps.length; i++, lapIndex++) {
-      deltas[lapIndex] = laps[lapIndex] - stintStartTime;
+      deltas[lapIndex] = laps[lapIndex] - baseline;
     }
-  });
-
+  }
   return deltas;
 }
 
-
+// Build final chart-ready dataset
 function buildData(
   lapTimesA: number[],
   lapTimesB: number[],
   strategyA: Stint[],
   strategyB: Stint[]
 ) {
-  // ✅ Use improved Δ function
   const a = stintBasedDelta(lapTimesA, strategyA);
   const b = stintBasedDelta(lapTimesB, strategyB);
 
@@ -60,41 +57,31 @@ function buildData(
   const keysB = strategyB.map((_, i) => `B${i}`);
 
   const data: Row[] = Array.from({ length: n }, (_, i) => {
-    const base: Row = { lap: i + 1, delta: null };
-    keysA.forEach((k) => (base[k] = null));
-    keysB.forEach((k) => (base[k] = null));
-    return base;
+    const row: Row = { lap: i + 1, delta: null };
+    [...keysA, ...keysB].forEach((k) => (row[k] = null));
+    return row;
   });
 
-  // Fill A
-  {
-    let idx = 0;
-    strategyA.forEach(([_compound, laps], sIdx) => {
-      for (let k = 0; k < laps && idx < n; k++, idx++) {
-        data[idx][`A${sIdx}`] = a[idx];
-      }
-    });
-  }
+  let idxA = 0;
+  strategyA.forEach(([, len], sIdx) => {
+    for (let k = 0; k < len && idxA < n; k++, idxA++) {
+      data[idxA][`A${sIdx}`] = a[idxA];
+    }
+  });
 
-  // Fill B
-  {
-    let idx = 0;
-    strategyB.forEach(([_compound, laps], sIdx) => {
-      for (let k = 0; k < laps && idx < n; k++, idx++) {
-        data[idx][`B${sIdx}`] = b[idx];
-      }
-    });
-  }
+  let idxB = 0;
+  strategyB.forEach(([, len], sIdx) => {
+    for (let k = 0; k < len && idxB < n; k++, idxB++) {
+      data[idxB][`B${sIdx}`] = b[idxB];
+    }
+  });
 
+  // Δ pace line
   for (let i = 0; i < n; i++) {
-   if (a[i] != null && b[i] != null) {
-  data[i].delta = (b[i] as number) - (a[i] as number);
-} else {
-  data[i].delta = null;
-}
+    data[i].delta = (a[i] !== null && b[i] !== null) ? (b[i]! - a[i]!) : null;
   }
 
-  return { data, keysA, keysB };
+  return data;
 }
 
 export default function StrategyCompareChart({
@@ -108,22 +95,22 @@ export default function StrategyCompareChart({
   strategyA: Stint[];
   strategyB: Stint[];
 }) {
-  const { data, keysA, keysB } = buildData(lapTimesA, lapTimesB, strategyA, strategyB);
+  const data = buildData(lapTimesA, lapTimesB, strategyA, strategyB);
 
   return (
     <div className="card p-4 mt-4">
       <div className="text-lg font-semibold mb-2">
         Strategy Comparison Pace Curve (Δ Pace)
       </div>
+
       <ResponsiveContainer width="100%" height={420}>
-        <LineChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+        <LineChart data={data} margin={{ top: 15, right: 20, bottom: 10, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" opacity={0.25} />
           <XAxis dataKey="lap" />
           <YAxis />
           <Tooltip />
           <Legend />
 
-          {/* Strategy A */}
           {strategyA.map(([compound], i) => (
             <Line
               key={`A${i}`}
@@ -131,13 +118,12 @@ export default function StrategyCompareChart({
               dataKey={`A${i}`}
               name={`Strategy A — ${compound}`}
               stroke={COMPOUND_COLORS[compound.toUpperCase()] || "#7db3ff"}
-              dot={{ r: 2 }}
               strokeWidth={2}
+              dot={{ r: 2 }}
               connectNulls
             />
           ))}
 
-          {/* Strategy B */}
           {strategyB.map(([compound], i) => (
             <Line
               key={`B${i}`}
@@ -145,22 +131,21 @@ export default function StrategyCompareChart({
               dataKey={`B${i}`}
               name={`Strategy B — ${compound}`}
               stroke={COMPOUND_COLORS[compound.toUpperCase()] || "#ff8a8a"}
-              dot={{ r: 2 }}
               strokeWidth={2}
               strokeOpacity={0.9}
+              dot={{ r: 2 }}
               connectNulls
             />
           ))}
 
-          {/* Δ (B - A) */}
           <Line
             type="monotone"
             dataKey="delta"
             name="Δ (B - A)"
             stroke="gold"
-            strokeDasharray="5 5"
-            dot={false}
             strokeWidth={2}
+            strokeDasharray="4 4"
+            dot={false}
             connectNulls
           />
         </LineChart>

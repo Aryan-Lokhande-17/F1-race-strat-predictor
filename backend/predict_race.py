@@ -19,6 +19,7 @@ LOOKUP = pd.read_csv(BASE_DIR / "Excelfiles" / "display_lookup.csv")
 PACE_FEATURES = pd.read_csv(BASE_DIR / "Excelfiles" / "hybrid_pace_features.csv")
 PACE_FEATURES = PACE_FEATURES.drop_duplicates(["driverId","constructorId","circuitId"])
 
+
 class DriverEntry(BaseModel):
     driverId: int
     constructorId: int

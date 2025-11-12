@@ -1,106 +1,214 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { predictStrategy } from "../api/strategy";
 import StrategyChart from "../components/StrategyChart";
-import { findBestStrategy } from "../lib/strategySearch";
-import type { Stint } from "../lib/strategySearch";
-
+import Modal from "../components/Modal";
+import { RACE_LAPS } from "../lib/raceLapCounts";
 
 const TYRE_COLORS: Record<string, string> = {
   SOFT: "bg-red-600",
-  MEDIUM: "bg-yellow-500",
+  MEDIUM: "bg-yellow-500 text-black",
   HARD: "bg-gray-300 text-black",
 };
 
+const AVAILABLE_COMPOUNDS = ["SOFT", "MEDIUM", "HARD"] as const;
+type Compound = (typeof AVAILABLE_COMPOUNDS)[number];
+
+const TRACKS = Object.keys(RACE_LAPS);
+
 export default function StrategySimulator() {
-  const [strategy, setStrategy] = useState<Stint[]>([
-    ["MEDIUM", 12],
-    ["HARD", 28],
+  const [track, setTrack] = useState<string>(
+    TRACKS.includes("Bahrain") ? "Bahrain" : TRACKS[0]
+  );
+
+  const [strategy, setStrategy] = useState<[Compound, number][]>([
     ["SOFT", 10],
+    ["MEDIUM", 20],
+    ["HARD", 27],
   ]);
 
   const [result, setResult] = useState<any>(null);
-  const [bestFound, setBestFound] = useState<{ strategy: Stint[]; time: number } | null>(null);
+  const [bestFound, setBestFound] = useState<{
+    strategy: [Compound, number][];
+    time: number;
+  } | null>(null);
 
-  const runSim = async () => {
-    const payload = {
-      track: "Bahrain",
-      strategy,
-      base_lap_time: 96.4,
-      pit_loss: 21.5,
-      driverId: 830,
-      constructorId: 131,
-      circuitId: 1,
-    };
+  const [loading, setLoading] = useState(false);
 
+  // 🏁 Run Simulation (predict_strategy)
+  const runSim = useCallback(async () => {
+    setLoading(true);
     try {
+      const payload = {
+        track,
+        strategy,
+        base_lap_time: 96.4,
+        pit_loss: 21.5,
+        driverId: 830,
+        constructorId: 131,
+        circuitId: 1,
+      };
+
       const data = await predictStrategy(payload);
       setResult(data);
     } catch (err) {
       console.error(err);
-      alert("Strategy simulation failed");
+      alert("❌ Strategy simulation failed.");
+    } finally {
+      setLoading(false);
     }
+  }, [track, strategy]);
+
+  // 🔥 Suggest Best Strategy (calls /suggest_strategy)
+  const suggestBest = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("http://127.0.0.1:8000/suggest_strategy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          track,
+          base_lap_time: 96.4,
+          pit_loss: 21.5,
+          driverId: 830,
+          constructorId: 131,
+          circuitId: 1,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.error) {
+        alert("⚠ " + data.error);
+        return;
+      }
+
+      if (!data.best_strategy) {
+        alert("⚠ No valid strategy found.");
+        return;
+      }
+
+      setStrategy(data.best_strategy);
+      setBestFound({
+        strategy: data.best_strategy,
+        time: data.predicted_time,
+      });
+    } catch (err) {
+      console.error(err);
+      alert("❌ Failed to fetch best strategy.");
+    } finally {
+      setLoading(false);
+    }
+  }, [track]);
+
+  // 🧩 Update compound for stint
+  const updateCompound = (i: number, compound: string) => {
+    if (!AVAILABLE_COMPOUNDS.includes(compound as Compound)) return;
+    setStrategy((prev) =>
+      prev.map((s, idx) => (idx === i ? [compound as Compound, s[1]] : s))
+    );
   };
 
-  const suggestBest = async () => {
-    const base = {
-      track: "Bahrain",
-      base_lap_time: 96.4,
-      pit_loss: 21.5,
-      driverId: 830,
-      constructorId: 131,
-      circuitId: 1,
-    };
-
-    const best = await findBestStrategy(base);
-    if (!best) return alert("⚠ No valid strategy found");
-
-    setStrategy(best.strategy);     // ✅ Apply best strategy to UI
-    setBestFound(best);            // ✅ Show modal UI
-  };
-
+  // 🧩 Update laps for stint
   const updateStint = (i: number, laps: number) => {
-    setStrategy(prev => prev.map((s, idx) => (idx === i ? [s[0], Number(laps)] : s)));
+    setStrategy((prev) =>
+      prev.map((s, idx) => (idx === i ? [s[0], Number(laps)] : s))
+    );
+  };
+
+  // ➕ Add new stint
+  const addStint = () => {
+    setStrategy((prev) => [...prev, ["MEDIUM", 5]]);
+  };
+
+  // ❌ Remove stint
+  const deleteStint = (i: number) => {
+    setStrategy((prev) => prev.filter((_, idx) => idx !== i));
   };
 
   return (
-    <div className="p-8 text-white">
-      <h1 className="text-3xl font-bold mb-6">Tyre Strategy Simulator</h1>
+    <div className="p-8 text-white min-h-screen bg-neutral-950">
+      <h1 className="text-3xl font-bold mb-6 text-red-400">
+        🏎️ Tyre Strategy Simulator
+      </h1>
+
+      {/* Track Selector */}
+      <div className="mb-6">
+        <label className="block mb-2 text-sm text-gray-300">Select Track</label>
+        <select
+          value={track}
+          onChange={(e) => setTrack(e.target.value)}
+          className="bg-neutral-800 p-2 rounded w-60"
+        >
+          {TRACKS.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <p className="mt-1 text-sm text-gray-400">
+          Laps: {RACE_LAPS[track] ?? "—"}
+        </p>
+      </div>
 
       {/* Strategy Inputs */}
       <div className="space-y-3 mb-4">
         {strategy.map(([compound, laps], i) => (
           <div key={i} className="flex items-center gap-3">
-            <div className={`px-4 py-2 rounded ${TYRE_COLORS[compound]}`}>
-              {compound}
-            </div>
+            <select
+              value={compound}
+              onChange={(e) => updateCompound(i, e.target.value)}
+              className={`px-4 py-2 rounded ${TYRE_COLORS[compound]}`}
+            >
+              {AVAILABLE_COMPOUNDS.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
 
             <input
               type="number"
               min={1}
-              className="bg-neutral-800 p-2 rounded w-24"
               value={laps}
               onChange={(e) => updateStint(i, Number(e.target.value))}
+              className="bg-neutral-800 p-2 rounded w-24"
             />
-
             <span className="opacity-60 text-sm">laps</span>
+
+            <button
+              onClick={() => deleteStint(i)}
+              className="ml-2 px-3 py-1 bg-neutral-700 hover:bg-neutral-600 rounded text-sm"
+            >
+              Remove
+            </button>
           </div>
         ))}
+
+        <div>
+          <button
+            onClick={addStint}
+            className="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 rounded text-sm"
+          >
+            + Add Stint
+          </button>
+        </div>
       </div>
 
-      {/* Buttons */}
+      {/* Action Buttons */}
       <div className="flex gap-4 mb-6">
         <button
           onClick={runSim}
+          disabled={loading}
           className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded"
         >
-          Run Strategy Simulation
+          {loading ? "Running..." : "Run Strategy Simulation"}
         </button>
 
         <button
           onClick={suggestBest}
+          disabled={loading}
           className="px-4 py-2 bg-green-500 hover:bg-green-600 font-semibold rounded"
         >
-          Suggest Best Strategy
+          {loading ? "Searching..." : "Suggest Best Strategy"}
         </button>
       </div>
 
@@ -108,39 +216,35 @@ export default function StrategySimulator() {
       {result && (
         <>
           <p className="text-xl mt-6">
-            <strong>Total Race Time:</strong> {result.total_race_time}s
+            <strong>Total Race Time:</strong>{" "}
+            <span className="text-yellow-400">
+              {result.total_race_time}s
+            </span>
           </p>
           <StrategyChart lapTimes={result.lap_times} />
         </>
       )}
 
-      {/* ✅ Modal UI */}
-      {bestFound && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center">
-          <div className="bg-neutral-900 p-6 rounded-lg shadow-xl w-96">
-            <h2 className="text-xl font-bold mb-4">🔥 Best Strategy Found</h2>
+      {/* Modal for best strategy */}
+      <Modal open={!!bestFound} onClose={() => setBestFound(null)}>
+        <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+          🔥 Best Strategy Found
+        </h2>
 
-            <ul className="mb-4 space-y-2">
-              {bestFound.strategy.map(([compound, laps], i) => (
-                <li key={i} className="text-lg">
-                  • <span className="font-semibold">{compound}</span> — {laps} laps
-                </li>
-              ))}
-            </ul>
+        {bestFound?.strategy.map(([compound, laps], i) => (
+          <p key={i} className="text-lg mb-1">
+            <span className="font-semibold">{compound}</span> — {laps} laps
+          </p>
+        ))}
 
-            <p className="text-md mb-4">
-              <strong>Estimated Race Time:</strong> {bestFound.time.toFixed(3)}s
-            </p>
-
-            <button
-              onClick={() => setBestFound(null)}
-              className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
+        <p className="mt-4 text-gray-300">
+          Estimated Race Time:
+          <span className="text-yellow-400 font-semibold">
+            {" "}
+            {bestFound?.time?.toFixed(3)}s
+          </span>
+        </p>
+      </Modal>
     </div>
   );
 }

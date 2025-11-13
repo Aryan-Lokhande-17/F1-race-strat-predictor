@@ -7,16 +7,9 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
-
-# -------------------------
-# Local imports
-# -------------------------
 from model_def import HybridLSTM
-from strategy_simulator import simulate_race, suggest_strategy
+from strategy_simulator import simulate_race, suggest_strategy, race_model, PACE_REF
 
-# -------------------------
-# FastAPI setup
-# -------------------------
 app = FastAPI()
 
 app.add_middleware(
@@ -57,6 +50,7 @@ except Exception as e:
     print(f"[WARN] ⚠ Could not load HybridLSTM model: {e}")
     model = None
 
+
 # -------------------------
 # Pydantic request models
 # -------------------------
@@ -92,7 +86,6 @@ def predict_strategy(req: StrategyRequest):
     base_lap = req.base_lap_time if req.base_lap_time is not None else TRACK_DATA[track_key]["avg_lap"]
     pit_loss = req.pit_loss if req.pit_loss is not None else TRACK_DATA[track_key]["pit_loss"]
 
-    # Run simulation
     total, laps = simulate_race(
         strategy=req.strategy,
         base_lap_time=base_lap,
@@ -121,9 +114,6 @@ def predict_strategy(req: StrategyRequest):
 # -------------------------
 @app.post("/suggest_strategy")
 async def suggest_best_strategy(req: Request):
-    """
-    Suggests the best tyre strategy automatically using hybrid_opt3_final model + race pace predictor.
-    """
     try:
         data = await req.json()
 
@@ -206,6 +196,114 @@ def get_display_lookup():
     return _DISPLAY_LOOKUP
 
 
+# -------------------------
+# 🏁 Predict Race Finishing Order / Winner
+# -------------------------
+class FinishingOrderRequest(BaseModel):
+    drivers: List[Dict[str, int]]  # [{driverId, constructorId, circuitId, grid_position}, ...]
+    track: str
+
+
+@app.post("/predict_winner")
+def predict_race_order(req: FinishingOrderRequest):
+    """Predicts the finishing order based on pace model and current selections."""
+    if race_model is None or PACE_REF.empty:
+        return {"error": "Race pace model not loaded or pace reference missing."}
+
+    print("PACE_REF columns:", PACE_REF.columns.tolist())
+    print("Unique driverIds:", PACE_REF["driverId"].unique()[:10])
+    print("Unique constructorIds:", PACE_REF["constructorId"].unique()[:10])
+    print("Unique circuitIds:", PACE_REF["circuitId"].unique()[:10])
+    print("PACE_REF sample:\n", PACE_REF.head(5))
+
+    try:
+        df_rows = []
+        for entry in req.drivers:
+            d_id = entry.get("driverId")
+            c_id = entry.get("constructorId")
+            cir_id = entry.get("circuitId")
+
+            row = PACE_REF[
+                (PACE_REF.driverId == d_id)
+                & (PACE_REF.constructorId == c_id)
+                & (PACE_REF.circuitId == cir_id)
+            ]
+            if len(row) > 0:
+                df_rows.append(row)
+
+        if not df_rows:
+            return {"error": "No valid entries matched in pace reference."}
+
+        df = pd.concat(df_rows, ignore_index=True)
+
+        # --- Inject grid positions ---
+        grid_positions = []
+        for entry in req.drivers:
+            d_id = entry.get("driverId")
+            c_id = entry.get("constructorId")
+            pos = entry.get("grid_position", None)
+
+            match_idx = df.index[
+                (df["driverId"] == d_id) & (df["constructorId"] == c_id)
+            ]
+            if len(match_idx) > 0:
+                df.loc[match_idx, "grid_position"] = pos
+            grid_positions.append(pos)
+
+        # Ensure grid_position column exists
+        if "grid_position" not in df.columns:
+            df["grid_position"] = grid_positions[: len(df)]
+
+        # --- Prepare features ---
+        feature_cols = [
+            "grid_position",
+            "driver_strength_career",
+            "driver_strength_season",
+            "team_strength",
+            "driver_dnf_rate",
+            "team_dnf_rate",
+            "driver_track_form",
+            "team_track_form",
+        ]
+
+        df = df.fillna(0)
+
+        # --- Predict and rank ---
+        preds = race_model.predict(df[feature_cols])
+        df["predicted_performance"] = preds
+        df["predicted_rank"] = df["predicted_performance"].rank(method="dense", ascending=True)
+        df = df.sort_values("predicted_rank")
+
+        lookup = get_display_lookup()
+        df = df.merge(
+    lookup[["driverId", "constructorId", "forename", "surname", "team_name"]],
+    on=["driverId", "constructorId"],
+    how="left"
+)
+        # --- Build response ---
+        result = df[
+            [
+                "driverId", "constructorId", "code", "forename", "surname",
+                "team_name", "grid_position", "predicted_performance", "predicted_rank"
+            ]
+        ].to_dict(orient="records")
+
+        winner = result[0] if len(result) > 0 else None
+
+        return {
+            "track": req.track,
+            "predicted_order": result,
+            "winner": winner,
+        }
+
+    except Exception as e:
+        print(f"[ERROR] /predict_winner failed: {e}")
+        return {"error": f"Prediction failed: {e}"}
+
+
+# -------------------------
+# Misc lookup endpoints
+# -------------------------
 @app.get("/lookup/drivers")
 def lookup_drivers():
     df = get_display_lookup()

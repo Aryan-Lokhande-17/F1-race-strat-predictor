@@ -219,3 +219,4 @@ def suggest_strategy(track: str, base_lap_time: float, pit_loss: float,
             print(f"[WARN] Strategy eval failed: {e}")
 
     return {"best_strategy": best_strategy, "predicted_time": round(best_time, 3)}
+    

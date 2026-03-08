@@ -50,13 +50,13 @@ export default function StrategyCompare() {
     strat: [string, number][];
     setStrat: (s: [string, number][]) => void;
   }) => (
-    <div className="p-4 border border-neutral-800 rounded-lg">
+    <div className="p-4 border border-[color:var(--line)] rounded-lg">
       <h2 className="font-semibold mb-2">{label}</h2>
 
       {strat.map(([compound, laps], i) => (
         <div key={i} className="flex items-center gap-3 mb-2">
           <select
-            className="bg-neutral-800 p-2 rounded"
+            className="field"
             value={compound}
             onChange={(e) => {
               const next = [...strat];
@@ -74,7 +74,7 @@ export default function StrategyCompare() {
           <input
             type="number"
             min={1}
-            className="bg-neutral-800 p-2 rounded w-20"
+            className="field w-20"
             value={laps}
             onChange={(e) => {
               const next = [...strat];
@@ -84,7 +84,7 @@ export default function StrategyCompare() {
           />
 
           <button
-            className="text-red-500 hover:text-red-400"
+            className="text-red-500 hover:text-red-600"
             onClick={() => setStrat(strat.filter((_, x) => x !== i) as any)}
           >
             ✕
@@ -93,7 +93,7 @@ export default function StrategyCompare() {
       ))}
 
       <button
-        className="mt-2 px-3 py-1 bg-neutral-700 hover:bg-neutral-600 rounded"
+        className="mt-2 px-3 py-1 bg-[color:var(--muted)] hover:bg-slate-200 border border-[color:var(--line)] rounded"
         onClick={() => setStrat([...strat, ["SOFT", 10]] as any)}
       >
         + Add Stint
@@ -102,7 +102,7 @@ export default function StrategyCompare() {
   );
 
   return (
-    <div className="p-8 text-white">
+    <div className="p-8 text-[color:var(--text)]">
       <h1 className="text-3xl font-bold mb-6">Compare 2 Race Strategies</h1>
 
       {/* Editing UI */}
@@ -113,7 +113,7 @@ export default function StrategyCompare() {
 
       <button
         onClick={runCompare}
-        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
+        className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
       >
         Run Comparison
       </button>

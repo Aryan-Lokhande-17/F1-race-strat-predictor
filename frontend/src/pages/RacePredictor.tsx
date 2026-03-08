@@ -22,6 +22,10 @@ type PredictedRow = {
   predicted_performance: number;
 };
 
+const EMPTY_GRID: GridRow[] = Array.from({ length: 20 }, (_, i) => ({
+  grid_position: i + 1,
+}));
+
 export default function RacePredictor() {
   const { data: tracks } = useQuery<{ tracks: string[] }>({
     queryKey: ["tracks"],
@@ -34,9 +38,7 @@ export default function RacePredictor() {
   });
 
   const [track, setTrack] = useState<string>("");
-  const [rows, setRows] = useState<GridRow[]>(
-    Array.from({ length: 20 }, (_, i) => ({ grid_position: i + 1 }))
-  );
+  const [rows, setRows] = useState<GridRow[]>(EMPTY_GRID);
   const [result, setResult] = useState<any>(null);
   const [bestStrat, setBestStrat] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -46,9 +48,22 @@ export default function RacePredictor() {
     label: `${d.forename} ${d.surname} (${d.team_name})`,
   }));
 
-  const canRun =
-    !!track &&
-    rows.every((r) => r.driverId && r.constructorId && r.grid_position > 0);
+  const selectedValues = useMemo(
+    () =>
+      new Set(
+        rows
+          .filter((r) => r.driverId && r.constructorId)
+          .map((r) => `${r.driverId}|${r.constructorId}`)
+      ),
+    [rows]
+  );
+
+  const hasMissingDrivers = rows.some(
+    (r) => !r.driverId || !r.constructorId || r.grid_position <= 0
+  );
+  const hasDuplicateDriver = selectedValues.size !== rows.length;
+
+  const canRun = !!track && !hasMissingDrivers && !hasDuplicateDriver;
 
   const runPrediction = async () => {
     if (!canRun) return;
@@ -66,7 +81,7 @@ export default function RacePredictor() {
       const res = await predictWinner(payload);
       if (res.error) throw new Error(res.error);
       setResult(res);
-      setBestStrat(null); // clear old results
+      setBestStrat(null);
     } catch (err) {
       console.error(err);
       alert("Prediction failed");
@@ -89,7 +104,7 @@ export default function RacePredictor() {
       };
       const res = await optimizeStrategy(payload);
       setBestStrat(res);
-      setResult(null); // clear old results
+      setResult(null);
     } catch (err) {
       console.error(err);
       alert("Optimization failed");
@@ -98,19 +113,27 @@ export default function RacePredictor() {
     }
   };
 
+  const autofillGrid = () => {
+    if (!lookup || lookup.length < 20) return;
+    setRows(
+      lookup.slice(0, 20).map((d, i) => ({
+        grid_position: i + 1,
+        driverId: d.driverId,
+        constructorId: d.constructorId,
+      }))
+    );
+  };
+
   return (
     <div className="grid gap-4">
       <div className="card p-4">
-        <div className="text-xl font-semibold mb-3">
-          🏎️ Race Winner Predictor
-        </div>
+        <div className="text-xl font-semibold mb-3">🏎️ Race Winner Predictor</div>
 
-        {/* === Track Selection === */}
         <div className="grid md:grid-cols-3 gap-3 pt-3">
           <div>
             <label className="text-xs opacity-70">Track</label>
             <select
-              className="w-full bg-neutral-900 border border-neutral-800 rounded p-2"
+              className="field"
               value={track}
               onChange={(e) => setTrack(e.target.value)}
             >
@@ -124,53 +147,77 @@ export default function RacePredictor() {
           </div>
         </div>
 
-        {/* === Grid Setup === */}
         <div className="mt-4">
-          <div className="text-sm font-medium mb-2">Grid Setup</div>
-          <div className="grid gap-2">
-            {rows.map((r, i) => (
-              <div key={i} className="flex gap-2 items-center">
-                <div className="w-16 text-sm opacity-80">P{i + 1}</div>
-                <select
-                  className="flex-1 bg-neutral-900 border border-neutral-800 rounded p-2"
-                  value={
-                    r.driverId && r.constructorId
-                      ? `${r.driverId}|${r.constructorId}`
-                      : ""
-                  }
-                  onChange={(e) => {
-                    const [driverId, constructorId] = e.target.value
-                      .split("|")
-                      .map(Number);
-                    const next = [...rows];
-                    next[i].driverId = driverId;
-                    next[i].constructorId = constructorId;
-                    setRows(next);
-                  }}
-                >
-                  <option value="">Select driver/team…</option>
-                  {selectable.map((s) => (
-                    <option key={s.value} value={s.value}>
-                      {s.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="number"
-                  min={1}
-                  className="w-28 bg-neutral-900 border border-neutral-800 rounded p-2"
-                  value={r.grid_position}
-                  onChange={(e) => {
-                    const next = [...rows];
-                    next[i].grid_position = Number(e.target.value || 1);
-                    setRows(next);
-                  }}
-                />
-              </div>
-            ))}
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-sm font-medium">Driver Prediction Grid Setup</div>
+            <div className="flex gap-2">
+              <button className="btn-secondary" onClick={autofillGrid} type="button">
+                Autofill 2024 Grid
+              </button>
+              <button className="btn-secondary" onClick={() => setRows(EMPTY_GRID)} type="button">
+                Reset Grid
+              </button>
+            </div>
           </div>
 
-          {/* === Buttons === */}
+          {(hasMissingDrivers || hasDuplicateDriver) && (
+            <div className="mb-3 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+              {hasMissingDrivers
+                ? "Please select all 20 drivers/teams and valid grid positions."
+                : "Each driver/team can only be selected once in the prediction grid."}
+            </div>
+          )}
+
+          <div className="grid gap-2 max-h-[520px] overflow-y-auto pr-1">
+            {rows.map((r, i) => {
+              const currentValue =
+                r.driverId && r.constructorId
+                  ? `${r.driverId}|${r.constructorId}`
+                  : "";
+
+              return (
+                <div key={i} className="flex gap-2 items-center">
+                  <div className="w-16 text-sm opacity-80">P{i + 1}</div>
+                  <select
+                    className="field"
+                    value={currentValue}
+                    onChange={(e) => {
+                      const [driverId, constructorId] = e.target.value
+                        .split("|")
+                        .map(Number);
+                      const next = [...rows];
+                      next[i].driverId = driverId;
+                      next[i].constructorId = constructorId;
+                      setRows(next);
+                    }}
+                  >
+                    <option value="">Select driver/team…</option>
+                    {selectable.map((s) => (
+                      <option
+                        key={s.value}
+                        value={s.value}
+                        disabled={selectedValues.has(s.value) && s.value !== currentValue}
+                      >
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="number"
+                    min={1}
+                    className="w-24 field"
+                    value={r.grid_position}
+                    onChange={(e) => {
+                      const next = [...rows];
+                      next[i].grid_position = Number(e.target.value || 1);
+                      setRows(next);
+                    }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
           <div className="mt-4 flex flex-wrap gap-3 justify-end">
             <button
               className="btn-primary"
@@ -191,23 +238,20 @@ export default function RacePredictor() {
         </div>
       </div>
 
-      {/* === 🏆 Race Winner Results === */}
       {result?.predicted_order && (
-        <div className="card p-4 border border-yellow-600">
-          <div className="text-lg font-semibold mb-2">
-            🏁 Predicted Race Results — {track}
-          </div>
+        <div className="card p-4 border border-red-200">
+          <div className="text-lg font-semibold mb-2">🏁 Predicted Race Results — {track}</div>
 
           {result?.winner && (
-            <div className="mb-3 text-yellow-400 font-medium text-lg">
-              🏆 Winner: {result.winner.forename} {result.winner.surname} —{" "}
+            <div className="mb-3 text-red-700 font-medium text-lg">
+              🏆 Winner: {result.winner.forename} {result.winner.surname} — {" "}
               {result.winner.team_name}
             </div>
           )}
 
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="text-left opacity-70 border-b border-neutral-700">
+              <thead className="text-left opacity-70 border-b border-[color:var(--line)]">
                 <tr>
                   <th className="py-1 pr-4">Pos</th>
                   <th className="py-1 pr-4">Driver</th>
@@ -218,16 +262,14 @@ export default function RacePredictor() {
               </thead>
               <tbody>
                 {result.predicted_order.map((r: PredictedRow, i: number) => (
-                  <tr key={i} className="border-t border-neutral-800">
+                  <tr key={i} className="border-t border-[color:var(--line)]">
                     <td className="py-1 pr-4">{i + 1}</td>
                     <td className="py-1 pr-4">
                       {r.forename} {r.surname}
                     </td>
-                    <td className="py-1 pr-4 text-gray-400">{r.team_name}</td>
+                    <td className="py-1 pr-4 text-slate-600">{r.team_name}</td>
                     <td className="py-1 pr-4">{r.grid_position}</td>
-                    <td className="py-1 pr-4">
-                      {r.predicted_performance?.toFixed(3)}
-                    </td>
+                    <td className="py-1 pr-4">{r.predicted_performance?.toFixed(3)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -236,30 +278,22 @@ export default function RacePredictor() {
         </div>
       )}
 
-      {/* === ⚙️ Best Strategy === */}
       {bestStrat?.best_strategy && (
-        <div className="card p-4 border border-blue-600">
-          <div className="text-lg font-semibold mb-2">
-            🔧 Suggested Strategy (Best)
-          </div>
+        <div className="card p-4 border border-sky-300">
+          <div className="text-lg font-semibold mb-2">🔧 Suggested Strategy (Best)</div>
           <div className="text-sm">
             <div>
               Track: <span className="opacity-80">{track}</span>
             </div>
             <div>
-              Total time:{" "}
-              <span className="opacity-80">
-                {bestStrat.predicted_time?.toFixed(3)} s
-              </span>
+              Total time: <span className="opacity-80">{bestStrat.predicted_time?.toFixed(3)} s</span>
             </div>
             <div className="mt-1">
-              {bestStrat.best_strategy.map(
-                (s: [string, number], i: number) => (
-                  <div key={i}>
-                    Stint {i + 1}: {s[0]} × {s[1]} laps
-                  </div>
-                )
-              )}
+              {bestStrat.best_strategy.map((s: [string, number], i: number) => (
+                <div key={i}>
+                  Stint {i + 1}: {s[0]} × {s[1]} laps
+                </div>
+              ))}
             </div>
           </div>
         </div>

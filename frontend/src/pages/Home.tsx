@@ -1,9 +1,9 @@
 export default function Home(){
   return (
     <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-xl border border-neutral-800 bg-gradient-to-b from-red-900/20 via-transparent to-transparent p-10">
+      <section className="relative overflow-hidden rounded-xl border border-[color:var(--line)] bg-gradient-to-b from-red-500/20 via-transparent to-transparent p-10">
         <div className="max-w-3xl">
-          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-neutral-900/70 px-3 py-1 text-xs text-[color:var(--subtle)] border border-neutral-800">Powered by OpenF1</div>
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[color:var(--muted)]/70 px-3 py-1 text-xs text-[color:var(--subtle)] border border-[color:var(--line)]">Powered by OpenF1</div>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight"><span className="text-[color:var(--brand)]">Race</span> Strategy
             <br/>Prediction Hub</h1>
           <p className="mt-3 text-[color:var(--muted-text)]">Harness historical F1 data to explore race strategy, podium finishes, starting grids, and weather with clean visual analytics.</p>

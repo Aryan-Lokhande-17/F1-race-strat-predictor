@@ -32,7 +32,7 @@ function Nav() {
   ]
 
   return (
-    <header className="border-b border-neutral-800 sticky top-0 z-10 bg-[color:var(--bg)]/90 backdrop-blur">
+    <header className="border-b border-[color:var(--line)] sticky top-0 z-10 bg-[color:var(--bg)]/95 backdrop-blur">
       <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-6">
         <Link to="/" className="text-xl font-semibold hover:opacity-90 transition">
           <span className="text-[color:var(--brand)]"></span>F1 Dashboard
@@ -45,7 +45,7 @@ function Nav() {
               className={`px-3 py-1.5 rounded-md text-sm ${
                 pathname === t.path
                   ? 'bg-[color:var(--brand)] text-white'
-                  : 'hover:bg-neutral-900 text-[color:var(--subtle)]'
+                  : 'hover:bg-[color:var(--muted)] text-[color:var(--subtle)]'
               }`}
             >
               {t.label}

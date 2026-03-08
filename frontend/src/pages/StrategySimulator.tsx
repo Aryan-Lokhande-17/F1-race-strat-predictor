@@ -125,18 +125,18 @@ export default function StrategySimulator() {
   };
 
   return (
-    <div className="p-8 text-white min-h-screen bg-neutral-950">
-      <h1 className="text-3xl font-bold mb-6 text-red-400">
+    <div className="p-8 text-[color:var(--text)] min-h-screen bg-[color:var(--card)]">
+      <h1 className="text-3xl font-bold mb-6 text-red-600">
         🏎️ Tyre Strategy Simulator
       </h1>
 
       {/* Track Selector */}
       <div className="mb-6">
-        <label className="block mb-2 text-sm text-gray-300">Select Track</label>
+        <label className="block mb-2 text-sm text-slate-600">Select Track</label>
         <select
           value={track}
           onChange={(e) => setTrack(e.target.value)}
-          className="bg-neutral-800 p-2 rounded w-60"
+          className="field w-60"
         >
           {TRACKS.map((t) => (
             <option key={t} value={t}>
@@ -144,7 +144,7 @@ export default function StrategySimulator() {
             </option>
           ))}
         </select>
-        <p className="mt-1 text-sm text-gray-400">
+        <p className="mt-1 text-sm text-slate-500">
           Laps: {RACE_LAPS[track] ?? "—"}
         </p>
       </div>
@@ -170,13 +170,13 @@ export default function StrategySimulator() {
               min={1}
               value={laps}
               onChange={(e) => updateStint(i, Number(e.target.value))}
-              className="bg-neutral-800 p-2 rounded w-24"
+              className="field w-24"
             />
             <span className="opacity-60 text-sm">laps</span>
 
             <button
               onClick={() => deleteStint(i)}
-              className="ml-2 px-3 py-1 bg-neutral-700 hover:bg-neutral-600 rounded text-sm"
+              className="ml-2 px-3 py-1 bg-[color:var(--muted)] hover:bg-slate-200 border border-[color:var(--line)] rounded text-sm"
             >
               Remove
             </button>
@@ -186,7 +186,7 @@ export default function StrategySimulator() {
         <div>
           <button
             onClick={addStint}
-            className="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 rounded text-sm"
+            className="px-3 py-1 bg-[color:var(--muted)] hover:bg-slate-200 border border-[color:var(--line)] rounded text-sm"
           >
             + Add Stint
           </button>
@@ -198,7 +198,7 @@ export default function StrategySimulator() {
         <button
           onClick={runSim}
           disabled={loading}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded"
+          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
         >
           {loading ? "Running..." : "Run Strategy Simulation"}
         </button>
@@ -206,7 +206,7 @@ export default function StrategySimulator() {
         <button
           onClick={suggestBest}
           disabled={loading}
-          className="px-4 py-2 bg-green-500 hover:bg-green-600 font-semibold rounded"
+          className="px-4 py-2 bg-amber-300 hover:bg-amber-400 text-slate-900 font-semibold rounded"
         >
           {loading ? "Searching..." : "Suggest Best Strategy"}
         </button>
@@ -217,7 +217,7 @@ export default function StrategySimulator() {
         <>
           <p className="text-xl mt-6">
             <strong>Total Race Time:</strong>{" "}
-            <span className="text-yellow-400">
+            <span className="text-amber-600">
               {result.total_race_time}s
             </span>
           </p>
@@ -227,7 +227,7 @@ export default function StrategySimulator() {
 
       {/* Modal for best strategy */}
       <Modal open={!!bestFound} onClose={() => setBestFound(null)}>
-        <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+        <h2 className="text-2xl font-bold text-amber-600 mb-4">
           🔥 Best Strategy Found
         </h2>
 
@@ -237,9 +237,9 @@ export default function StrategySimulator() {
           </p>
         ))}
 
-        <p className="mt-4 text-gray-300">
+        <p className="mt-4 text-slate-600">
           Estimated Race Time:
-          <span className="text-yellow-400 font-semibold">
+          <span className="text-amber-600 font-semibold">
             {" "}
             {bestFound?.time?.toFixed(3)}s
           </span>

@@ -64,13 +64,13 @@ export default function Historical(){
       <div className="card p-4 flex flex-col md:flex-row gap-3">
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Season</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); }}>
+          <select className="field" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); }}>
             {YEARS.map(y=> <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Race</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={activeMeeting ?? ''} onChange={e=> setMeetingKey(Number(e.target.value))}>
+          <select className="field" value={activeMeeting ?? ''} onChange={e=> setMeetingKey(Number(e.target.value))}>
             {meetings.isLoading && <option>Loading…</option>}
             {!meetings.isLoading && meetings.data?.map(m=> (
               <option key={m.meeting_key} value={m.meeting_key}>{m.meeting_name}</option>
@@ -95,7 +95,7 @@ export default function Historical(){
                   .filter(x=> x.position % 2 === 1)
                   .sort((a,b)=> a.position-b.position)
                   .map(g=> (
-                    <div key={`${g.position}-${g.driver_number}`} className="flex items-center justify-between rounded-md border border-neutral-800 bg-neutral-950 px-3 py-2">
+                    <div key={`${g.position}-${g.driver_number}`} className="flex items-center justify-between rounded-md border border-[color:var(--line)] bg-[color:var(--muted)] px-3 py-2">
                       <div className="text-xs opacity-70">P{g.position}</div>
                       <div className="flex items-center gap-2">
                         <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs text-white" style={{ backgroundColor: teamColorForDriver(drivers.data, g.driver_number) || '#444' }}>{g.driver_number}</span>
@@ -109,7 +109,7 @@ export default function Historical(){
                   .filter(x=> x.position % 2 === 0)
                   .sort((a,b)=> a.position-b.position)
                   .map(g=> (
-                    <div key={`${g.position}-${g.driver_number}`} className="flex items-center justify-between rounded-md border border-neutral-800 bg-neutral-950 px-3 py-2">
+                    <div key={`${g.position}-${g.driver_number}`} className="flex items-center justify-between rounded-md border border-[color:var(--line)] bg-[color:var(--muted)] px-3 py-2">
                       <div className="text-xs opacity-70">P{g.position}</div>
                       <div className="flex items-center gap-2">
                         <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs text-white" style={{ backgroundColor: teamColorForDriver(drivers.data, g.driver_number) || '#444' }}>{g.driver_number}</span>
@@ -156,12 +156,12 @@ export default function Historical(){
               </thead>
               <tbody>
                 {groupByDriver(stints.data).map(row=> (
-                  <tr key={row.driver_number} className="border-t border-neutral-800">
+                  <tr key={row.driver_number} className="border-t border-[color:var(--line)]">
                     <td className="py-2 pr-4 font-mono">{driverLabel(drivers.data, row.driver_number)}</td>
                     <td className="py-2">
                       <div className="flex flex-wrap gap-2">
                         {row.stints.map(s=> (
-                          <span key={s.stint_number} className={`px-2 py-1 rounded bg-neutral-900 border border-neutral-800`}>{s.compound} ({s.lap_start}-{s.lap_end})</span>
+                          <span key={s.stint_number} className={`px-2 py-1 rounded bg-[color:var(--muted)] border border-[color:var(--line)]`}>{s.compound} ({s.lap_start}-{s.lap_end})</span>
                         ))}
                       </div>
                     </td>

@@ -1,4 +1,4 @@
-import { http } from './openf1'
+import { http, httpFallback } from './openf1'
 import type { SessionDto } from './openf1'
 
 export interface MeetingDto {
@@ -14,13 +14,19 @@ export async function getMeetingsByYear(year: number){
 }
 
 export async function getRaceSessionForMeeting(meeting_key: number){
-  const { data, error } = await http<SessionDto[]>(`/sessions?meeting_key=${meeting_key}&session_name=Race`)
+  const { data, error } = await httpFallback<SessionDto[]>([
+    `/sessions?meeting_key=${meeting_key}&session_name=Race`,
+    `/sessions?meeting_key=${meeting_key}&session_type=Race`,
+  ])
   if (error) return { data: null as SessionDto | null, error }
   return { data: (data && data[0]) ?? null, error: null as string | null }
 }
 
 export async function getQualifyingSessionForMeeting(meeting_key: number){
-  const { data, error } = await http<SessionDto[]>(`/sessions?meeting_key=${meeting_key}&session_name=Qualifying`)
+  const { data, error } = await httpFallback<SessionDto[]>([
+    `/sessions?meeting_key=${meeting_key}&session_name=Qualifying`,
+    `/sessions?meeting_key=${meeting_key}&session_type=Qualifying`,
+  ])
   if (error) return { data: null as SessionDto | null, error }
   return { data: (data && data[0]) ?? null, error: null as string | null }
 }

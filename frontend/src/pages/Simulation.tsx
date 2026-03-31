@@ -133,13 +133,13 @@ export default function Simulation(){
       <div className="card p-4 flex flex-col md:flex-row gap-3">
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Season</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); setSelected([]) }}>
+          <select className="field" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); setSelected([]) }}>
             {YEARS.map(y=> <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Race</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={activeMeeting ?? ''} onChange={e=> { setMeetingKey(Number(e.target.value)); setSelected([]) }}>
+          <select className="field" value={activeMeeting ?? ''} onChange={e=> { setMeetingKey(Number(e.target.value)); setSelected([]) }}>
             {meetings.isLoading && <option>Loading…</option>}
             {!meetings.isLoading && meetings.data?.map(m=> (
               <option key={m.meeting_key} value={m.meeting_key}>{m.meeting_name}</option>
@@ -168,7 +168,7 @@ export default function Simulation(){
               <CartesianGrid strokeDasharray="4 4" stroke="#2a2a2a" />
               <XAxis dataKey="lap" stroke="#888" />
               <YAxis reversed domain={[1, 20]} allowDecimals={false} stroke="#888" />
-              <Tooltip contentStyle={{ background: '#111', border: '1px solid #222' }} />
+              <Tooltip contentStyle={{ background: '#fff', border: '1px solid #dbe3ee', color: '#111827' }} />
               {typeof hoverLap==='number' && hoverLap>0 && (
                 <ReferenceLine x={hoverLap} stroke="#666" strokeDasharray="3 3" />
               )}
@@ -190,15 +190,15 @@ export default function Simulation(){
           )}
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          <button onClick={()=> setSelected(Array.from(driverNumbersWithData(positions.data)).slice(0,10) as number[])} className="px-3 py-1 rounded border border-neutral-800 bg-neutral-900">Select Top 10</button>
-          <button onClick={()=> setSelected(Array.from(driverNumbersWithData(positions.data)) as number[])} className="px-3 py-1 rounded border border-neutral-800 bg-neutral-900">Select All (with data)</button>
-          <button onClick={()=> setSelected([])} className="px-3 py-1 rounded border border-neutral-800 bg-neutral-900">Clear</button>
+          <button onClick={()=> setSelected(Array.from(driverNumbersWithData(positions.data)).slice(0,10) as number[])} className="px-3 py-1 rounded border border-[color:var(--line)] bg-[color:var(--muted)]">Select Top 10</button>
+          <button onClick={()=> setSelected(Array.from(driverNumbersWithData(positions.data)) as number[])} className="px-3 py-1 rounded border border-[color:var(--line)] bg-[color:var(--muted)]">Select All (with data)</button>
+          <button onClick={()=> setSelected([])} className="px-3 py-1 rounded border border-[color:var(--line)] bg-[color:var(--muted)]">Clear</button>
           {sortByNumberAsc(dedupeDrivers(drivers.data)).map(d=> (
             <button
               key={d.driver_number}
               onClick={()=> toggle(d.driver_number)}
               title={`${d.driver_number} ${code3(d.full_name)}`}
-              className={`px-3 py-1 rounded-full border ${selected.includes(d.driver_number) ? 'text-white border-white/0' : 'bg-neutral-900 text-white border-neutral-800'}`}
+              className={`px-3 py-1 rounded-full border ${selected.includes(d.driver_number) ? 'text-white border-white/0' : 'bg-[color:var(--muted)] text-slate-700 border-[color:var(--line)]'}`}
               style={ selected.includes(d.driver_number) ? { backgroundColor: teamColorForDriver(drivers.data, d.driver_number) || '#E10600' } : undefined }
             >
               {d.driver_number} {code3(d.full_name)}

@@ -10,7 +10,7 @@ export default function StrategyChart({ lapTimes }: { lapTimes: number[] }) {
   }));
 
   return (
-    <div className="mt-6 bg-neutral-900 p-4 rounded-lg">
+    <div className="mt-6 bg-[color:var(--muted)] p-4 rounded-lg">
       <h2 className="text-lg font-semibold mb-3">Tyre Degradation Curve (Δ Pace)</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
@@ -18,9 +18,9 @@ export default function StrategyChart({ lapTimes }: { lapTimes: number[] }) {
           <YAxis stroke="#aaa" />
           <Tooltip
             contentStyle={{
-              background: "#111",
-              border: "1px solid #333",
-              color: "white",
+              background: "#fff",
+              border: "1px solid #dbe3ee",
+              color: "#111827",
             }}
           />
           <Line type="monotone" dataKey="delta" stroke="#ff4747" strokeWidth={2} dot={false} />

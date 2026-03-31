@@ -58,13 +58,13 @@ export default function TrackInfo(){
       <div className="card p-4 flex flex-col md:flex-row gap-3">
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Season</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); }}>
+          <select className="field" value={year} onChange={e=>{ setYear(Number(e.target.value)); setMeetingKey(null); }}>
             {YEARS.map(y=> <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
         <div className="flex items-center gap-2">
           <label className="text-sm opacity-70">Race</label>
-          <select className="bg-neutral-900 border border-neutral-800 rounded px-2 py-1" value={activeMeeting ?? ''} onChange={e=> setMeetingKey(Number(e.target.value))}>
+          <select className="field" value={activeMeeting ?? ''} onChange={e=> setMeetingKey(Number(e.target.value))}>
             {meetings.isLoading && <option>Loading…</option>}
             {!meetings.isLoading && meetings.data?.map(m=> (
               <option key={m.meeting_key} value={m.meeting_key}>{m.meeting_name}</option>
@@ -178,7 +178,7 @@ function TrackInfoPanel({ raceSession, loading }:{ raceSession:any, loading:bool
 
 function Stat({label, value}:{label:string; value:string}){
   return (
-    <div className="bg-[color:var(--card)] border border-neutral-800 rounded-md p-3">
+    <div className="bg-[color:var(--card)] border border-[color:var(--line)] rounded-md p-3">
       <div className="uppercase text-[10px] tracking-wide opacity-60">{label}</div>
       <div className="text-lg">{value}</div>
     </div>

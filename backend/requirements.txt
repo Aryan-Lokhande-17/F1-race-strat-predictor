@@ -1,5 +1,11 @@
-torch
 fastapi
 uvicorn
-numpy
 pydantic
+numpy
+pandas
+scikit-learn
+torch
+fastf1
+requests
+streamlit
+plotly

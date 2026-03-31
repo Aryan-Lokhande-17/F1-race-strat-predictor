@@ -17,7 +17,10 @@ TRACK_PARAMS_PATH = BASE_DIR / "data" / "track_params.json"
 MODEL_FEATURES_PATH = BASE_DIR / "model_features.json"
 MODEL_PATH = BASE_DIR / "models" / "hybrid_opt3_final.pth"
 
-app = FastAPI()
+BASE_DIR = Path(__file__).resolve().parent
+TRACK_PARAMS_PATH = BASE_DIR / "data" / "track_params.json"
+MODEL_FEATURES_PATH = BASE_DIR / "model_features.json"
+MODEL_PATH = BASE_DIR / "models" / "hybrid_opt3_final.pth"
 
 # Enable CORS for the Streamlit/React frontend
 app.add_middleware(
@@ -93,9 +96,6 @@ def predict_strategy(req: StrategyRequest):
         optional_feats=optional_feats,
         SEQ_LEN=SEQ_LEN,
         track_env=req.track_env,
-        driverId=req.driverId,
-        constructorId=req.constructorId,
-        circuitId=req.circuitId,
     )
 
     return {

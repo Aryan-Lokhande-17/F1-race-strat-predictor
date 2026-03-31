@@ -25,6 +25,7 @@ def _startup_reminder():
     print("Focus: 2025 Strategy-Only (Pace/Winner logic removed)")
     print("=================================")
 
+
 _startup_reminder()
 
 def _load_deg_model():

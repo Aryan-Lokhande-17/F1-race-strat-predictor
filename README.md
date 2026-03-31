@@ -1,12 +1,7 @@
 # F1 Strategy Predictor — 2025 Data-Centric Edition
 
-This project is now focused **exclusively** on race strategy and tyre degradation modeling.
+This project focused on race strategy and tyre degradation modeling.
 
-- ✅ Strategy comparison (`Default` vs `Alternate`)
-- ✅ 2025 race-only data pipeline
-- ✅ FastF1-based retrieval notebook
-- ✅ Dark F1-style Streamlit UI
-- ❌ Winner / podium prediction removed from active stack
 
 ---
 

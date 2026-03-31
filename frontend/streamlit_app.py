@@ -8,15 +8,7 @@ import requests
 import streamlit as st
 import plotly.graph_objects as go
 
-def resolve_api_base() -> str:
-    try:
-        # st.secrets raises StreamlitSecretNotFoundError when secrets.toml is absent
-        return st.secrets.get("API_BASE", "http://127.0.0.1:8000")
-    except Exception:
-        return "http://127.0.0.1:8000"
-
-
-API_BASE = resolve_api_base()
+API_BASE = st.secrets.get("API_BASE", "http://127.0.0.1:8000") if hasattr(st, "secrets") else "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="F1 Strategy Predictor", page_icon="🏎️", layout="wide")
 

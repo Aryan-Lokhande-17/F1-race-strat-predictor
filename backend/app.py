@@ -1,4 +1,4 @@
-"""Legacy strategy API (winner prediction removed)."""
+"""Legacy strategy API (winner prediction removed; force-applied on main)."""
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple

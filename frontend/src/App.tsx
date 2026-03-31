@@ -7,7 +7,6 @@ import SimulationPage from './pages/Simulation'
 import TrackInfoPage from './pages/TrackInfo'
 import HomePage from './pages/Home'
 import StrategySimulator from "./pages/StrategySimulator";
-import RacePredictor from "./pages/RacePredictor"; 
 import StrategyCompare from "./pages/StrategyCompare";
 
 const qc = new QueryClient()
@@ -27,8 +26,6 @@ function Nav() {
     // ✅ Strategy Comparison Page
     { path: '/compare', label: 'Compare Strategies' },
 
-    // Already existed:
-    { path: '/race', label: 'Race Predictor' }, 
   ]
 
   return (
@@ -88,7 +85,6 @@ export default function App(){
           {/* ✅ Compare Strategies */}
           <Route path="/compare" element={<StrategyCompare />} />
 
-          <Route path="/race" element={<RacePredictor />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

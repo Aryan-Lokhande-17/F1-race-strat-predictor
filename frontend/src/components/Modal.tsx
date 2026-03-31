@@ -20,7 +20,7 @@ export default function Modal({
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-[#0f0f0f] border border-[#303030] shadow-[0_0_25px_#ffdf40] text-white rounded-xl p-6 max-w-md w-full"
+            className="bg-white border border-[color:var(--line)] shadow-lg text-[color:var(--text)] rounded-xl p-6 max-w-md w-full"
             initial={{ scale: 0.85, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.85, opacity: 0 }}

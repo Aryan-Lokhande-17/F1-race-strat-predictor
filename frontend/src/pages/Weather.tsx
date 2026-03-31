@@ -42,7 +42,7 @@ export default function Weather(){
 
 function Stat({label, value}:{label:string; value:string}){
   return (
-    <div className="bg-[color:var(--card)] border border-neutral-800 rounded-md p-3">
+    <div className="bg-[color:var(--card)] border border-[color:var(--line)] rounded-md p-3">
       <div className="uppercase text-[10px] tracking-wide opacity-60">{label}</div>
       <div className="text-lg">{value}</div>
     </div>

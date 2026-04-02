@@ -4,37 +4,11 @@ Run:
 """
 from __future__ import annotations
 
-import os
-from pathlib import Path
-
 import requests
 import streamlit as st
 import plotly.graph_objects as go
 
-
-def resolve_api_base() -> str:
-    # 1) explicit env var wins
-    env_base = os.getenv("API_BASE")
-    if env_base:
-        return env_base
-
-    # 2) optional local secrets file (without touching st.secrets runtime parser)
-    secrets_path = Path(__file__).parent / ".streamlit" / "secrets.toml"
-    if secrets_path.exists():
-        try:
-            import tomllib
-
-            data = tomllib.loads(secrets_path.read_text(encoding="utf-8"))
-            if isinstance(data, dict) and data.get("API_BASE"):
-                return str(data["API_BASE"])
-        except Exception:
-            pass
-
-    # 3) safe default
-    return "http://127.0.0.1:8000"
-
-
-API_BASE = resolve_api_base()
+API_BASE = st.secrets.get("API_BASE", "http://127.0.0.1:8000") if hasattr(st, "secrets") else "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="F1 Strategy Predictor", page_icon="🏎️", layout="wide")
 

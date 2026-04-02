@@ -2,14 +2,16 @@
 
 @layer base {
   :root {
-    --bg: #0A0A0A;
-    --card: #0F0F10;
-    --line: #2B2B2B;
-    --muted: #171717;
-    --text: #F5F5F5;
-    --subtle: #CFCFCF;
-    --muted-text: #A3A3A3;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --line: #dbe3ee;
+    --muted: #edf2f7;
+    --text: #111827;
+    --subtle: #334155;
+    --muted-text: #64748b;
     --brand: #E10600;
+    --brand-dark: #b40400;
+    --accent: #ffd84d;
   }
   html, body, #root { height: 100%; }
   body { @apply bg-[color:var(--bg)] text-[color:var(--text)] antialiased; }
@@ -18,15 +20,19 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium bg-[color:var(--brand)] text-white hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-red-500/40;
+    @apply inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium bg-[color:var(--brand)] text-white hover:bg-[color:var(--brand-dark)] transition focus:outline-none focus:ring-2 focus:ring-red-500/30;
   }
   .card {
-    @apply bg-[color:var(--card)] border border-neutral-800/80 rounded-xl shadow-sm transition-shadow;
+    @apply bg-[color:var(--card)] border border-[color:var(--line)] rounded-xl shadow-sm transition-shadow;
   }
   .card:hover {
     @apply shadow-md;
   }
   .pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900 px-3 py-1 text-sm text-white hover:border-neutral-700 transition focus:outline-none focus:ring-2 focus:ring-white/10;
+    @apply inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--muted)] px-3 py-1 text-sm text-[color:var(--text)] hover:border-[color:var(--brand)] transition focus:outline-none focus:ring-2 focus:ring-red-500/20;
   }
+}
+
+.field {
+  @apply w-full rounded-md border border-[color:var(--line)] bg-[color:var(--muted)] px-2 py-2 text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-red-500/20;
 }

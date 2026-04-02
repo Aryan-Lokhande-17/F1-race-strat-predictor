@@ -1,12 +1,7 @@
 # F1 Strategy Predictor — 2025 Data-Centric Edition
 
-This project is now focused **exclusively** on race strategy and tyre degradation modeling.
+This project focused on race strategy and tyre degradation modeling.
 
-- ✅ Strategy comparison (`Default` vs `Alternate`)
-- ✅ 2025 race-only data pipeline
-- ✅ FastF1-based retrieval notebook
-- ✅ Dark F1-style Streamlit UI
-- ❌ Winner / podium prediction removed from active stack
 
 ---
 
@@ -113,8 +108,6 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 cd frontend
 streamlit run streamlit_app.py
 ```
-
-- Optional: set `API_BASE` as an environment variable (or in `frontend/.streamlit/secrets.toml`); if absent, Streamlit defaults to `http://127.0.0.1:8000`.
 
 ---
 

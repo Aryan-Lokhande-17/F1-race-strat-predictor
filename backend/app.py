@@ -1,4 +1,3 @@
-"""Legacy strategy API (winner prediction removed; force-applied on main)."""
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -17,7 +16,12 @@ TRACK_PARAMS_PATH = BASE_DIR / "data" / "track_params.json"
 MODEL_FEATURES_PATH = BASE_DIR / "model_features.json"
 MODEL_PATH = BASE_DIR / "models" / "hybrid_opt3_final.pth"
 
-app = FastAPI()
+BASE_DIR = Path(__file__).resolve().parent
+TRACK_PARAMS_PATH = BASE_DIR / "data" / "track_params.json"
+MODEL_FEATURES_PATH = BASE_DIR / "model_features.json"
+MODEL_PATH = BASE_DIR / "models" / "hybrid_opt3_final.pth"
+
+# Enable CORS for the Streamlit/React frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,8 +30,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Load track parameters
 with TRACK_PARAMS_PATH.open("r", encoding="utf-8") as f:
     TRACK_DATA = json.load(f)
+
+# Load model feature metadata
 with MODEL_FEATURES_PATH.open("r", encoding="utf-8") as f:
     feats = json.load(f)
 
@@ -36,13 +43,14 @@ compound_cols = feats["compound_dummies"]
 optional_feats = feats["optional_feats"]
 SEQ_LEN = feats["seq_len"]
 
+# Load the Hybrid LSTM Model
 try:
     model = HybridLSTM(input_dim=len(opt3_features))
     model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
     model.eval()
-except Exception:
+except Exception as e:
+    print(f"Model load failed: {e}")
     model = None
-
 
 class StrategyRequest(BaseModel):
     track: str
@@ -50,7 +58,9 @@ class StrategyRequest(BaseModel):
     base_lap_time: Optional[float] = None
     pit_loss: Optional[float] = None
     track_env: Optional[Dict[str, float]] = None
-
+    driverId: Optional[int] = 0
+    constructorId: Optional[int] = 0
+    circuitId: Optional[int] = 0
 
 class OptimizeRequest(BaseModel):
     track: str
@@ -59,17 +69,19 @@ class OptimizeRequest(BaseModel):
     pit_loss: Optional[float] = None
     track_env: Optional[Dict[str, float]] = None
 
-
 @app.get("/health")
 def health():
-    return {"status": "ok", "focus": "strategy_only"}
+    return {"status": "ok", "focus": "strategy_only_2025"}
 
+@app.get("/tracks")
+def list_tracks():
+    return {"tracks": list(TRACK_DATA.keys())}
 
 @app.post("/predict_strategy")
 def predict_strategy(req: StrategyRequest):
     track_key = req.track.strip().title()
     if track_key not in TRACK_DATA:
-        return {"error": f"Unknown track '{req.track}'. Add it to data/track_params.json."}
+        return {"error": f"Unknown track '{req.track}'."}
 
     base_lap = req.base_lap_time if req.base_lap_time is not None else TRACK_DATA[track_key]["avg_lap"]
     pit_loss = req.pit_loss if req.pit_loss is not None else TRACK_DATA[track_key]["pit_loss"]
@@ -87,12 +99,10 @@ def predict_strategy(req: StrategyRequest):
 
     return {
         "track": track_key,
-        "base_lap_used": base_lap,
-        "pit_loss_used": pit_loss,
         "total_race_time": round(float(total), 3),
         "lap_times": np.round(laps, 3).tolist(),
+        "delta_to_avg": round(float(total - (base_lap * len(laps))), 3)
     }
-
 
 @app.post("/suggest_strategy")
 async def suggest_best_strategy(req: Request):
@@ -101,53 +111,10 @@ async def suggest_best_strategy(req: Request):
         track=data.get("track", "Bahrain"),
         base_lap_time=data.get("base_lap_time", 96.5),
         pit_loss=data.get("pit_loss", 21.5),
-        driverId=0,
-        constructorId=0,
-        circuitId=0,
+        driverId=data.get("driverId", 0),
+        constructorId=data.get("constructorId", 0),
+        circuitId=data.get("circuitId", 0),
     )
     if not result or result.get("best_strategy") is None:
         return {"error": "No valid strategy found."}
     return result
-
-
-@app.post("/optimize_strategy")
-def optimize_strategy(req: OptimizeRequest):
-    track_key = req.track.strip().title()
-    if track_key not in TRACK_DATA:
-        return {"error": f"Unknown track: {req.track}. Add it in data/track_params.json."}
-
-    race_laps = TRACK_DATA[track_key]["laps"]
-    base_lap = req.base_lap_time if req.base_lap_time is not None else TRACK_DATA[track_key]["avg_lap"]
-    pit_loss = req.pit_loss if req.pit_loss is not None else TRACK_DATA[track_key]["pit_loss"]
-
-    from optimizer import evaluate_plans
-
-    out = evaluate_plans(
-        race_laps=race_laps,
-        compounds=req.compounds,
-        base_lap=base_lap,
-        pit_loss=pit_loss,
-        model=model,
-        compound_cols=compound_cols,
-        optional_feats=optional_feats,
-        seq_len=SEQ_LEN,
-        track_env=req.track_env,
-    )
-    best = out.get("best")
-    if not best:
-        return {"error": "No valid strategy found"}
-
-    return {
-        "track": track_key,
-        "laps": race_laps,
-        "base_lap_used": base_lap,
-        "pit_loss_used": pit_loss,
-        "best_strategy": best.get("strategy"),
-        "predicted_time": best.get("total_race_time"),
-        "top_strategies": out.get("top", []),
-    }
-
-
-@app.get("/tracks")
-def list_tracks():
-    return {"tracks": list(TRACK_DATA.keys())}

@@ -3,13 +3,12 @@ __pycache__/
 .venv/
 *.env
 fastf1_cache
-# FastF1 cache
-backend/cache/
+backend/data
 backend/cache/**
 F1_Data
 backend/saved_models/*.pkl
 backend/saved_models/*.h5
-
+backend/.fastf1_cache/
 backend/model/cache
 
 backend/model/saved_models/rf_xgb_ensemble.pkl

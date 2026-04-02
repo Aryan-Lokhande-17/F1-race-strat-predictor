@@ -1,47 +1,155 @@
-## We are trying to create a model, that predicts tyre degradation as well as give the suggested tyre strategy which is race specific. Along with that we are also training a model that preditcts race winners based on the starting grid, quali performance, performance run data ir tyre deg data as an input, and drivers past statistics on that track.
+# F1 Strategy Predictor — 2025 Data-Centric Edition
 
-## 1. Data Gathering
-- We are creating a model that:
-  - Predicts **tyre degradation**.
-  - Suggests **race-specific tyre strategies**.
-  - Predicts **race winners** based on multiple factors such as:
-    - Starting grid
-    - Quali performance
-    - Performance run data / tyre degradation data
-    - Drivers’ past statistics on that track
+This project is now focused **exclusively** on race strategy and tyre degradation modeling.
 
-- **Initial Approach:**
-  - We tried using **FastF1**, but due to its API limit set at **500 requests/hour**, it wasn’t viable since our dataset exceeded this limit significantly.
-
-- **Final Solution:**
-  - After some research, we switched to **OpenF1** for data gathering.
-  - OpenF1 proved to be much more effective with its **API rate limit of 10 requests/second**, making it far more useful for large-scale data collection.
+- ✅ Strategy comparison (`Default` vs `Alternate`)
+- ✅ 2025 race-only data pipeline
+- ✅ FastF1-based retrieval notebook
+- ✅ Dark F1-style Streamlit UI
+- ❌ Winner / podium prediction removed from active stack
 
 ---
 
-## 2. Data Preprocessing
-- During the initial preprocessing runs, **almost half of the data was discarded** due to missing values.
+## Why this matters in F1
 
-- We experimented with **three methods** to handle missing data:
+A seemingly small degradation shift (e.g., **+0.2s/lap**) compounds rapidly:
 
-  **a) Global Median:**
-  - Takes the global average and fills missing values.
-  - Not viable since different drivers generate vastly different data, and the car’s performance also matters.
+- Over **50 laps** = **+10 seconds**
+- Over a pit-window phase = undercut/overcut opportunity gain/loss
 
-  **b) Time-Series Interpolation:**
-  - Fills gaps by drawing a straight line between the last known and next known value.
-  - Example:
-    - Lap 4 temp = 25°C
-    - Lap 6 temp = 26°C
-    - Lap 5 is filled with 25.5°C
-  - Works well for smoothly changing data like `air_temperature` or `track_temperature`.
-  - Performs poorly for **performance run data**.
+That is why this project prioritizes **lap-time evolution** and **degradation-aware strategy timing** rather than winner classification.
 
-  **c) Group Median (Final Choice):**
-  - Takes the median **within a defined group**.
-  - Grouping factors:
-    - `session_id` (e.g., FP1, Sprint Quali, etc.)
-    - `driver_number` (e.g., 44 for Lewis Hamilton 🐐)
-  - This method provided the most logical and performance-consistent imputation.
-"""
+---
 
+## Architecture
+
+### Data Engineering (2025 season)
+
+Use notebook: `backend/notebooks/data_retrieval_2025.ipynb`.
+
+It retrieves **completed 2025 Race sessions only** and exports:
+
+- `TyreLife`
+- `Compound`
+- `TrackStatus`
+- `LapTimeSeconds`
+- `FuelLoadKgEst` (estimated)
+- `AirTemp`
+- `TrackTemp`
+- thermal/mechanical wear indices
+
+Output dataset:
+
+- `backend/data/strategy_2025_race_only.csv`
+
+### Backend
+
+- Primary API: `backend/main.py`
+- Model: `RandomForestRegressor`
+- Modeling focus: relation among
+  - `TyreLife`
+  - `Compound`
+  - `TrackTemp`
+  - (plus fuel and wear proxies)
+  to predict lap-time evolution.
+
+### Frontend
+
+- Streamlit UI: `frontend/streamlit_app.py`
+- F1 dark theme
+- Main KPI: **Total Race Time Delta** between Default and Alternate strategy
+
+---
+
+## Thermal Degradation vs Mechanical Wear Logic
+
+The model uses two explicit degradation channels:
+
+1. **Thermal degradation**
+   - increases with tyre life and track temperature
+   - proxy: `TyreLife * (TrackTemp / 35)`
+
+2. **Mechanical wear**
+   - increases with tyre life and lap progression/load effects
+   - proxy: `TyreLife * (1 + LapNumber/max_lap * 0.15)`
+
+These are used alongside compound and fuel proxies to shape lap-time prediction curves.
+
+---
+
+## Setup (.venv)
+
+```bash
+cd /workspace/F1-race-strat-predictor
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install --upgrade pip
+pip install -r backend/requirements.txt
+```
+
+---
+
+## Run order (important)
+
+### 1) Retrieve 2025 data first
+
+```bash
+cd backend/notebooks
+jupyter notebook data_retrieval_2025.ipynb
+```
+
+Run all cells to produce `backend/data/strategy_2025_race_only.csv`.
+
+### 2) Start backend API
+
+```bash
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 3) Launch Streamlit UI
+
+```bash
+cd frontend
+streamlit run streamlit_app.py
+```
+
+- Optional: set `API_BASE` as an environment variable (or in `frontend/.streamlit/secrets.toml`); if absent, Streamlit defaults to `http://127.0.0.1:8000`.
+
+---
+
+## API
+
+### `POST /strategy/compare`
+
+Example payload:
+
+```json
+{
+  "year": 2025,
+  "event": "Bahrain Grand Prix",
+  "session": "R",
+  "driver": "VER",
+  "track_temp_c": 32,
+  "air_temp_c": 26,
+  "fuel_load_kg": 28.3,
+  "total_laps": 57
+}
+```
+
+Response includes:
+
+- `default_strategy`
+- `alternate_strategy`
+- `delta_seconds` (primary KPI)
+
+---
+
+## PR Sync
+
+This branch is a conflict-resolution refresh derived from the strategy-only mainline state.
+
+## Notes
+
+- Pipeline is modular and plug-and-play for 2025 race sessions.
+- If FastF1 calls fail/rate-limit, backend falls back to synthetic race-like laps so UI remains operational.

@@ -1,4 +1,3 @@
-"""2025 Strategy-Only API: Focuses on Tyre Degradation & Strategy Optimization."""
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
